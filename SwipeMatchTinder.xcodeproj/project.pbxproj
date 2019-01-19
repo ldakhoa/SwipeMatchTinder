@@ -12,6 +12,10 @@
 		0214054421F2D26C00D5DE5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0214054221F2D26C00D5DE5E /* Main.storyboard */; };
 		0214054621F2D26E00D5DE5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0214054521F2D26E00D5DE5E /* Assets.xcassets */; };
 		0214054921F2D26E00D5DE5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */; };
+		0214055821F2D6C300D5DE5E /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214055621F2D6C300D5DE5E /* Extensions+UIView.swift */; };
+		0214055921F2D6C300D5DE5E /* Extensions+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214055721F2D6C300D5DE5E /* Extensions+UIColor.swift */; };
+		0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */; };
+		0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		0214054521F2D26E00D5DE5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0214054821F2D26E00D5DE5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0214054A21F2D26E00D5DE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0214055621F2D6C300D5DE5E /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
+		0214055721F2D6C300D5DE5E /* Extensions+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIColor.swift"; sourceTree = "<group>"; };
+		0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
+		0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,8 @@
 		0214053D21F2D26C00D5DE5E /* SwipeMatchTinder */ = {
 			isa = PBXGroup;
 			children = (
+				0214055A21F2DAD300D5DE5E /* Views */,
+				0214055521F2D6B800D5DE5E /* Extensions */,
 				0214053E21F2D26C00D5DE5E /* AppDelegate.swift */,
 				0214054021F2D26C00D5DE5E /* ViewController.swift */,
 				0214054221F2D26C00D5DE5E /* Main.storyboard */,
@@ -62,6 +72,24 @@
 				0214054A21F2D26E00D5DE5E /* Info.plist */,
 			);
 			path = SwipeMatchTinder;
+			sourceTree = "<group>";
+		};
+		0214055521F2D6B800D5DE5E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0214055721F2D6C300D5DE5E /* Extensions+UIColor.swift */,
+				0214055621F2D6C300D5DE5E /* Extensions+UIView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0214055A21F2DAD300D5DE5E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
+				0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +165,10 @@
 			files = (
 				0214054121F2D26C00D5DE5E /* ViewController.swift in Sources */,
 				0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */,
+				0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */,
+				0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */,
+				0214055821F2D6C300D5DE5E /* Extensions+UIView.swift in Sources */,
+				0214055921F2D6C300D5DE5E /* Extensions+UIColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
