@@ -29,7 +29,7 @@ class CardView: UIView {
         return iv
     }()
     
-    let informationLabel: UILabel = {
+    fileprivate let informationLabel: UILabel = {
         let label = UILabel()
         label.text = " test name test name age"
         label.textColor = .white
@@ -37,24 +37,47 @@ class CardView: UIView {
         label.numberOfLines = 0
         return label
     }()
+
+    fileprivate let gradientLayer = CAGradientLayer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(imageView)
-        addSubview(informationLabel)
-        
-        imageView.fillSuperview()
+        setupLayout()
 
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
-        
         addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan)))
-    
     }
-
+    
+    // MARK: - Setup layout
+    
+    fileprivate func setupLayout() {
+        addSubview(imageView)
+        imageView.fillSuperview()
+        
+        setupGradientLayer() // we must place this in front of informationLabel to display imageView > gradientLayer > informationLabel
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+    }
+    
+    fileprivate func setupGradientLayer() {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.1]
+        layer.addSublayer(gradientLayer)
+    }
+    
+    override func layoutSubviews() {
+        // in here you know what your CardView frame will be
+        gradientLayer.frame = self.frame
+    }
+    
     // MARK: - Handle Pan Gesture
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ (subview) in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
@@ -93,8 +116,6 @@ class CardView: UIView {
             if shouldDismissCard {
                 self.removeFromSuperview()
             }
-            
-//            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height) // use superview to fix size of card when rotation
         }
     }
     
