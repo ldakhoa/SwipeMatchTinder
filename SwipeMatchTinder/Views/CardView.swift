@@ -26,6 +26,19 @@ class CardView: UIView {
                 barsStackView.addArrangedSubview(barView)
             }
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
+            
+        }
+    }
+    
+    fileprivate func setupImageIndexObserver() {
+        cardViewModel.imageIndexObserver = { [weak self] (index, image) in
+            self?.imageView.image = image
+            self?.barsStackView.arrangedSubviews.forEach({ (v) in
+                v.backgroundColor = self?.barDeselectedColor
+            })
+            self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
         }
     }
     
@@ -42,7 +55,6 @@ class CardView: UIView {
     
     fileprivate let informationLabel: UILabel = {
         let label = UILabel()
-        label.text = " test name test name age"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
         label.numberOfLines = 0
@@ -103,24 +115,17 @@ class CardView: UIView {
         let shouldAdvanceNextPhoto = tapLocation.x > frame.width / 2 ? true : false
         
         if shouldAdvanceNextPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
+            cardViewModel.advanceToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousPhoto()
         }
-        
-        let imageName = cardViewModel.imageNames[imageIndex]
-        imageView.image = UIImage(named: imageName)
-        
-        barsStackView.arrangedSubviews.forEach { (v) in
-            v.backgroundColor = barDeselectedColor
-        }
-        
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+
     }
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
+            // fix some buggy animation when swipe so fast
             superview?.subviews.forEach({ (subview) in
                 subview.layer.removeAllAnimations()
             })
