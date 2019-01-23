@@ -174,3 +174,4 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

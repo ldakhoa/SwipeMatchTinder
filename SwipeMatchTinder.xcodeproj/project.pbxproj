@@ -20,6 +20,11 @@
 		0221FF5821F4DD4300EAD109 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221FF5721F4DD4300EAD109 /* User.swift */; };
 		0221FF5C21F4E3DD00EAD109 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */; };
 		0221FF5E21F4EA4B00EAD109 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */; };
+		029D49F021F786BF0021328D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49EF21F786BF0021328D /* RegistrationViewController.swift */; };
+		029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F121F78B3D0021328D /* CustomTextField.swift */; };
+		029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029D49F421F848F00021328D /* GoogleService-Info.plist */; };
+		029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F621F84CE90021328D /* RegistrationViewModel.swift */; };
+		5B0D5F8666B5C8E48E3D8846 /* Pods_SwipeMatchTinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +43,13 @@
 		0221FF5721F4DD4300EAD109 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		029D49EF21F786BF0021328D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		029D49F121F78B3D0021328D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		029D49F421F848F00021328D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		029D49F621F84CE90021328D /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchTinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		667FCAC3EA8E7DA1F720587F /* Pods-SwipeMatchTinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchTinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder.release.xcconfig"; sourceTree = "<group>"; };
+		BE0B1A0186E3A69C0FD475A5 /* Pods-SwipeMatchTinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchTinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B0D5F8666B5C8E48E3D8846 /* Pods_SwipeMatchTinder.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +69,8 @@
 			children = (
 				0214053D21F2D26C00D5DE5E /* SwipeMatchTinder */,
 				0214053C21F2D26C00D5DE5E /* Products */,
+				77C1765DE93CB35281648F00 /* Pods */,
+				414EEDBC3FC111606BF20693 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				0214053E21F2D26C00D5DE5E /* AppDelegate.swift */,
+				029D49F321F821130021328D /* Customs */,
 				0214055521F2D6B800D5DE5E /* Extensions */,
 				0221FF5621F4DD2D00EAD109 /* Model */,
 				0214055A21F2DAD300D5DE5E /* Views */,
@@ -80,6 +96,7 @@
 				0214054521F2D26E00D5DE5E /* Assets.xcassets */,
 				0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */,
 				0214054A21F2D26E00D5DE5E /* Info.plist */,
+				029D49F421F848F00021328D /* GoogleService-Info.plist */,
 			);
 			path = SwipeMatchTinder;
 			sourceTree = "<group>";
@@ -116,6 +133,8 @@
 			isa = PBXGroup;
 			children = (
 				0214054021F2D26C00D5DE5E /* HomeViewController.swift */,
+				029D49EF21F786BF0021328D /* RegistrationViewController.swift */,
+				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -128,6 +147,31 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		029D49F321F821130021328D /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+				029D49F121F78B3D0021328D /* CustomTextField.swift */,
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
+		414EEDBC3FC111606BF20693 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		77C1765DE93CB35281648F00 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BE0B1A0186E3A69C0FD475A5 /* Pods-SwipeMatchTinder.debug.xcconfig */,
+				667FCAC3EA8E7DA1F720587F /* Pods-SwipeMatchTinder.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,9 +179,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0214054D21F2D26E00D5DE5E /* Build configuration list for PBXNativeTarget "SwipeMatchTinder" */;
 			buildPhases = (
+				130829AFC9080D98923C146C /* [CP] Check Pods Manifest.lock */,
 				0214053721F2D26C00D5DE5E /* Sources */,
 				0214053821F2D26C00D5DE5E /* Frameworks */,
 				0214053921F2D26C00D5DE5E /* Resources */,
+				75BADEA6B1F14B5F230E66A3 /* [CP] Embed Pods Frameworks */,
+				4FAD5981DC9538EACF4B4E26 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,12 +234,88 @@
 			buildActionMask = 2147483647;
 			files = (
 				0214054921F2D26E00D5DE5E /* LaunchScreen.storyboard in Resources */,
+				029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */,
 				0214054621F2D26E00D5DE5E /* Assets.xcassets in Resources */,
 				0214054421F2D26C00D5DE5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		130829AFC9080D98923C146C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwipeMatchTinder-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FAD5981DC9538EACF4B4E26 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75BADEA6B1F14B5F230E66A3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0214053721F2D26C00D5DE5E /* Sources */ = {
@@ -202,10 +325,13 @@
 				0221FF5E21F4EA4B00EAD109 /* Advertiser.swift in Sources */,
 				0214056021F2F34300D5DE5E /* CardView.swift in Sources */,
 				0214054121F2D26C00D5DE5E /* HomeViewController.swift in Sources */,
+				029D49F021F786BF0021328D /* RegistrationViewController.swift in Sources */,
 				0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */,
 				0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */,
 				0221FF5821F4DD4300EAD109 /* User.swift in Sources */,
 				0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */,
+				029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */,
+				029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */,
 				0214055821F2D6C300D5DE5E /* Extensions+UIView.swift in Sources */,
 				0214055921F2D6C300D5DE5E /* Extensions+UIColor.swift in Sources */,
 				0221FF5C21F4E3DD00EAD109 /* CardViewModel.swift in Sources */,
@@ -352,6 +478,7 @@
 		};
 		0214054E21F2D26E00D5DE5E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE0B1A0186E3A69C0FD475A5 /* Pods-SwipeMatchTinder.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -370,6 +497,7 @@
 		};
 		0214054F21F2D26E00D5DE5E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 667FCAC3EA8E7DA1F720587F /* Pods-SwipeMatchTinder.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
