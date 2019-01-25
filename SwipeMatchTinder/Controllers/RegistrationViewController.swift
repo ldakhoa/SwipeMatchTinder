@@ -18,10 +18,18 @@ class RegistrationViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         return button
     }()
+    
+    @objc func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true, completion: nil)
+    }
     
     let fullNameTextField: CustomTextField = {
         let tf = CustomTextField(padding: 24)
@@ -69,27 +77,26 @@ class RegistrationViewController: UIViewController {
         return button
     }()
     
+    let registeringHUD = JGProgressHUD(style: .dark)
+    
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+        registrationViewModel.performRegistration { [weak self] (err) in
             if let err = err {
-                print(err)
-                self.showHUDWithError(error: err)
+                self?.showHUDWithError(error: err)
                 return
             }
-            print(res?.user.uid ?? "")
         }
-        
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
         hud.show(in: self.view)
-        hud.dismiss(afterDelay: 4)
+        hud.dismiss(afterDelay: 3)
     }
     
     override func viewDidLoad() {
@@ -103,24 +110,40 @@ class RegistrationViewController: UIViewController {
         
     }
     
+    // MARK: - Reactive Programming Function
+    
     let registrationViewModel = RegistrationViewModel()
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] (isFormValid) in
+        
+        registrationViewModel.bindableIsFormValid.bind { [unowned self] (isFormValid) in
+            guard let isFormValid = isFormValid else { return }
             self.registerButton.isEnabled = isFormValid
-            if isFormValid {
-                self.registerButton.backgroundColor = #colorLiteral(red: 0.8140897155, green: 0.09555955976, blue: 0.3356131911, alpha: 1)
-                self.registerButton.setTitleColor(.white, for: .normal)
+            self.registerButton.backgroundColor = isFormValid ? #colorLiteral(red: 0.8140897155, green: 0.09555955976, blue: 0.3356131911, alpha: 1) : .lightGray
+            self.registerButton.setTitleColor(isFormValid ? .white : .gray, for: .normal)
+        }
+        
+        // Image picker
+        registrationViewModel.bindableImage.bind { [unowned self] (img) in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+            self.selectPhotoButton.setTitle("", for: .normal) // Some photos are show the title next to the image.
+        }
+        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            if isRegistering == true {
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: self.view)
             } else {
-                self.registerButton.backgroundColor = .lightGray
-                self.registerButton.setTitleColor(.gray, for: .normal)
+                self.registeringHUD.dismiss()
             }
         }
+        
     }
     
     // MARK: - Layout
     
-//    var overallStackViewCenterY: NSLayoutConstraint?
+    lazy var selectPhotoButtonWidthAnchor = selectPhotoButton.widthAnchor.constraint(equalToConstant: 275)
+    lazy var selectPhotoButtonHeightAnchor = selectPhotoButton.heightAnchor.constraint(equalToConstant: 275)
     
     lazy var verticalStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
@@ -135,23 +158,14 @@ class RegistrationViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.verticalSizeClass == .compact {
             overallStackView.axis = .horizontal
-            selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true 
-//            view.addSubview(scrollView)
-//            scrollView.fillSuperview()
-//
-//            scrollView.contentSize = view.frame.size
-//            scrollView.addSubview(overallStackView)
-//            overallStackViewCenterY?.isActive = false
-//            overallStackViewCenterY = overallStackView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
-//            overallStackViewCenterY?.isActive = true
-            
+            verticalStackView.distribution = .fillEqually
+            selectPhotoButtonWidthAnchor.isActive = true
+            selectPhotoButtonHeightAnchor.isActive = false
         } else {
             overallStackView.axis = .vertical
-//            view.addSubview(overallStackView)
-//            overallStackViewCenterY?.isActive = false
-//            overallStackViewCenterY = overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//            overallStackViewCenterY?.isActive = true
-            
+            verticalStackView.distribution = .fill
+            selectPhotoButtonWidthAnchor.isActive = false
+            selectPhotoButtonHeightAnchor.isActive = true
         }
     }
     
@@ -160,8 +174,6 @@ class RegistrationViewController: UIViewController {
         overallStackView.spacing = 10
         
         view.addSubview(overallStackView)
-        // fix height of button to support landscape mode
-
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 40, bottom: 0, right: 40))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
@@ -191,14 +203,6 @@ class RegistrationViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-//    let scrollView = UIScrollView()
-//
-//    var activeTextField: UITextField?
-//
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        activeTextField = textField
-//    }
 
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -206,27 +210,13 @@ class RegistrationViewController: UIViewController {
         let keyboardFrame = value.cgRectValue
         let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
         let difference = keyboardFrame.height - bottomSpace
-        
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
-//        scrollView.contentInset.bottom = keyboardFrame.height
-//        scrollView.scrollIndicatorInsets.bottom = keyboardFrame.height
-//
-//        guard let activeTextField = activeTextField else { return }
-//        let visibleRect = activeTextField.convert(activeTextField.bounds, to: scrollView)
-//        scrollView.scrollRectToVisible(visibleRect, animated: true)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self) // you'll have a retain cycle
-        
+
     }
     
     @objc fileprivate func handleKeyboardHide() {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.view.transform = .identity
-//            self.scrollView.contentInset.bottom = 0
         })
     }
     
@@ -236,6 +226,20 @@ class RegistrationViewController: UIViewController {
     
     @objc fileprivate func handleTapDismiss() {
         self.view.endEditing(true) // dismiss keyboard
+    }
+    
+}
+
+extension RegistrationViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.bindableImage.value = image
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
 }

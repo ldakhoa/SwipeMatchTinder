@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTextField: UITextField, UITextFieldDelegate {
+class CustomTextField: UITextField {
     
     let padding: CGFloat
     
@@ -17,7 +17,6 @@ class CustomTextField: UITextField, UITextFieldDelegate {
         super.init(frame: .zero)
         layer.cornerRadius = 25
         backgroundColor = .white
-        delegate = self
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
