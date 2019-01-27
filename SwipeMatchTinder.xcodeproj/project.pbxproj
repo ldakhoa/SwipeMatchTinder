@@ -136,7 +136,6 @@
 			children = (
 				0214054021F2D26C00D5DE5E /* HomeViewController.swift */,
 				029D49EF21F786BF0021328D /* RegistrationViewController.swift */,
-				029D49FA21FAB3FA0021328D /* ViewModels */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -144,6 +143,8 @@
 		0221FF5A21F4E3C900EAD109 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				029D49F821FAB0030021328D /* Bindable.swift */,
+				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
 				0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */,
 			);
 			path = ViewModels;
@@ -155,15 +156,6 @@
 				029D49F121F78B3D0021328D /* CustomTextField.swift */,
 			);
 			path = Customs;
-			sourceTree = "<group>";
-		};
-		029D49FA21FAB3FA0021328D /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
-				029D49F821FAB0030021328D /* Bindable.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		414EEDBC3FC111606BF20693 /* Frameworks */ = {

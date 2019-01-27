@@ -7,39 +7,25 @@
 //
 
 import UIKit
+import Firebase
+import JGProgressHUD
 
 class HomeViewController: UIViewController {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
-    let buttonsStackView = HomeBottomControlsStackView()
-//
-//    let cardViewModels = ([
-//        Advertiser(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster"),
-//        User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c"),
-//        User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c"),
-//
-//        ] as [ProducesCardViewModelDelegate]).map { (producer) -> CardViewModel in
-//            return producer.toCardViewModel()
-//    }
-//
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-                Advertiser(title: "Slide Out Menu", brandName: "Lets Build That App", posterPhotoName: "slide_out_menu_poster"),
-                User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
-                User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"]),
-        ] as [ProducesCardViewModelDelegate]
-        
-        let viewModels = producers.map({ return $0.toCardViewModel()})
-        return viewModels
-    }()
+    let bottomControls = HomeBottomControlsStackView()
+
+    var cardViewModels = [CardViewModel]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
         
         setupLayout()
-        setupDummyCards()
+        fetchUserFromFirestore()
         
     }
     
@@ -47,19 +33,16 @@ class HomeViewController: UIViewController {
         let registrationController = RegistrationViewController()
         present(registrationController, animated: true, completion: nil)
     }
-
-    fileprivate func setupDummyCards() {
-        cardViewModels.forEach { (cardViewModel) in
-            let cardView = CardView(frame: .zero)
-            cardView.cardViewModel = cardViewModel
-            cardsDeckView.addSubview(cardView)
-            cardView.fillSuperview()
-        }
-    }
     
-    // MARK: - Fileprivate
+    @objc fileprivate func handleRefresh() {
+        fetchUserFromFirestore()
+    }
+
+    
+    // MARK: - Layout
     fileprivate func setupLayout() {
-        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsStackView])
+        view.backgroundColor = .white
+        let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomControls])
         overallStackView.axis = .vertical
         
         view.addSubview(overallStackView)
@@ -70,6 +53,40 @@ class HomeViewController: UIViewController {
         overallStackView.bringSubviewToFront(cardsDeckView)
     }
     
+    // MARK: - Fileprivate
+    
+    var lastFetchedUser: User?
+    
+    fileprivate func setupCardFromUser(user: User) {
+        let cardView = CardView(frame: .zero)
+        cardView.cardViewModel = user.toCardViewModel()
+        cardsDeckView.addSubview(cardView)
+        cardsDeckView.sendSubviewToBack(cardView)
+        cardView.fillSuperview()
+    }
+    
+    fileprivate func fetchUserFromFirestore() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Fetching Users"
+        hud.show(in: view)
+        // pagination here to page through 2 users at a time
+        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
+        query.getDocuments { (snapshot, err) in
+            hud.dismiss()
+            if let err = err {
+                print("Failed to fetch user: \(err.localizedDescription)")
+                return
+            }
+            
+            snapshot?.documents.forEach({ (documentSnapshot) in
+                let userDictionary = documentSnapshot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModels.append(user.toCardViewModel())
+                self.lastFetchedUser = user
+                self.setupCardFromUser(user: user)
+            })
+        }
+    }
 
 }
 

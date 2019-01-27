@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CardView: UIView {
     
@@ -14,7 +15,11 @@ class CardView: UIView {
         didSet {
             // accessing index 0 will crash if imageNames.count == 0
             let imageName = cardViewModel.imageNames.first ?? ""
-            imageView.image = UIImage(named: imageName)
+            // load image using url
+            if let url = URL(string: imageName) {
+                imageView.sd_setImage(with: url, completed: nil)
+            }
+
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
@@ -33,11 +38,15 @@ class CardView: UIView {
     }
     
     fileprivate func setupImageIndexObserver() {
-        cardViewModel.imageIndexObserver = { [weak self] (index, image) in
-            self?.imageView.image = image
+        cardViewModel.imageIndexObserver = { [weak self] (index, imageUrl) in
+            if let url = URL(string: imageUrl ?? "") {
+                self?.imageView.sd_setImage(with: url, completed: nil)
+            }
+            
             self?.barsStackView.arrangedSubviews.forEach({ (v) in
                 v.backgroundColor = self?.barDeselectedColor
             })
+            
             self?.barsStackView.arrangedSubviews[index].backgroundColor = .white
         }
     }
@@ -98,7 +107,6 @@ class CardView: UIView {
         barsStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
         barsStackView.spacing = 4
         barsStackView.distribution = .fillEqually
-
     }
     
     override func layoutSubviews() {
@@ -107,7 +115,8 @@ class CardView: UIView {
     }
     
     // MARK: - Handle Pan / Tap Gesture
-    var imageIndex = 0
+    
+    var imageIndex = 0    
     fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
@@ -125,7 +134,7 @@ class CardView: UIView {
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
-            // fix some buggy animation when swipe so fast
+            // fix some buggy animation when we swipe so fast
             superview?.subviews.forEach({ (subview) in
                 subview.layer.removeAllAnimations()
             })
