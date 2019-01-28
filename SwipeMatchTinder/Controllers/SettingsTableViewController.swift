@@ -11,9 +11,15 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
+protocol SettingsControllerDelegate {
+    
+    func didSaveSettings()
+    
+}
 class SettingsTableViewController: UITableViewController {
     
     var user: User?
+    var delegate: SettingsControllerDelegate?
     
     lazy var image1Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
@@ -87,22 +93,23 @@ class SettingsTableViewController: UITableViewController {
                 print("Failed to save user setting \(err)")
                 return
             }
+            self.dismiss(animated: true, completion: {
+                print("Dimissal complete")
+                self.delegate?.didSaveSettings()
+            })
         }
     }
     
     fileprivate func fetchCurrentUser() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+        Firestore.firestore().fetchCurrentUser { (user, err) in
             if let err = err {
                 print("Failed to fetch user in setting\(err)")
                 return
             }
-        
-            guard let dictionary = snapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
+            
+            self.user = user
             self.loadUserPhotos()
             self.tableView.reloadData()
-            
         }
     }
     
@@ -124,10 +131,7 @@ class SettingsTableViewController: UITableViewController {
                 self.image3Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
             }
         }
-        
-
     }
-
     
     // MARK: - HeaderView
     
@@ -226,9 +230,6 @@ extension SettingsTableViewController {
             ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
             ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? -1)
             ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? -1)
-            if ageRangeCell.minSlider.value >= ageRangeCell.maxSlider.value {
-                ageRangeCell.minSlider.value = ageRangeCell.maxSlider.value
-            }
             return ageRangeCell
         }
         return cell
@@ -305,9 +306,7 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
                 
                 
             })
-            
         }
-        
     }
     
 }

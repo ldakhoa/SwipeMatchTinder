@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0206859121FE95B400416D50 /* AgeRangeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0206859021FE95B400416D50 /* AgeRangeLabel.swift */; };
+		0206859321FEA71600416D50 /* Firestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0206859221FEA71600416D50 /* Firestore+Utils.swift */; };
 		0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214053E21F2D26C00D5DE5E /* AppDelegate.swift */; };
 		0214054121F2D26C00D5DE5E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214054021F2D26C00D5DE5E /* HomeViewController.swift */; };
 		0214054421F2D26C00D5DE5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0214054221F2D26C00D5DE5E /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		0206859021FE95B400416D50 /* AgeRangeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeLabel.swift; sourceTree = "<group>"; };
+		0206859221FEA71600416D50 /* Firestore+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Firestore+Utils.swift"; sourceTree = "<group>"; };
 		0214053B21F2D26C00D5DE5E /* SwipeMatchTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0214053E21F2D26C00D5DE5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0214054021F2D26C00D5DE5E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				0214055721F2D6C300D5DE5E /* Extensions+UIColor.swift */,
+				0206859221FEA71600416D50 /* Firestore+Utils.swift */,
 				0214055621F2D6C300D5DE5E /* Extensions+UIView.swift */,
 			);
 			path = Extensions;
@@ -357,6 +360,7 @@
 				0214762C21FD645F0087780A /* SettingsTableViewController.swift in Sources */,
 				0221FF5821F4DD4300EAD109 /* User.swift in Sources */,
 				0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */,
+				0206859321FEA71600416D50 /* Firestore+Utils.swift in Sources */,
 				029D49F921FAB0030021328D /* Bindable.swift in Sources */,
 				029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */,
 				029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */,
