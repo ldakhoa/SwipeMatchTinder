@@ -30,8 +30,9 @@ class HomeViewController: UIViewController {
     }
     
     @objc fileprivate func handleSettings() {
-        let registrationController = RegistrationViewController()
-        present(registrationController, animated: true, completion: nil)
+        let settingsController = SettingsTableViewController()
+        let navController = UINavigationController(rootViewController: settingsController)
+        present(navController, animated: true, completion: nil)
     }
     
     @objc fileprivate func handleRefresh() {
