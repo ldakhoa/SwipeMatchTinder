@@ -63,7 +63,7 @@ class SettingsTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleCancel))
+            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         ]
     }
     
@@ -75,6 +75,7 @@ class SettingsTableViewController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
             "uid": uid,
+            "email": user?.email ?? "",
             "fullName": user?.name ?? "",
             "imageUrl1": user?.imageUrl1 ?? "",
             "imageUrl2": user?.imageUrl2 ?? "",
@@ -98,6 +99,13 @@ class SettingsTableViewController: UITableViewController {
                 self.delegate?.didSaveSettings()
             })
         }
+    }
+    
+    @objc fileprivate func handleLogout() {
+        
+        try? Auth.auth().signOut()
+        dismiss(animated: true, completion: nil)
+        
     }
     
     fileprivate func fetchCurrentUser() {
@@ -198,6 +206,9 @@ extension SettingsTableViewController {
         return section == 0 ? 0 : 1
     }
     
+    static let defaultMinSeekingAge = 18
+    static let defaultMaxSeekingAge = 50
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
@@ -223,13 +234,15 @@ extension SettingsTableViewController {
         // age range cell
         if indexPath.section == 5 {
             let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
-            ageRangeCell.minSlider.addTarget(self, action: #selector(handleAgeSeekingChange), for: .valueChanged)
+            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
             ageRangeCell.maxSlider.addTarget(self, action: #selector(handleAgeSeekingChange), for: .valueChanged)
             // we need tp set up the labels on our cell here
-            ageRangeCell.minLabel.text = "Min \(user?.minSeekingAge ?? -1)"
-            ageRangeCell.maxLabel.text = "Max \(user?.maxSeekingAge ?? -1)"
-            ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? -1)
-            ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? -1)
+            let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
+            let maxAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
+            ageRangeCell.minLabel.text = "Min \(minAge)"
+            ageRangeCell.maxLabel.text = "Max \(maxAge)"
+            ageRangeCell.minSlider.value = Float(minAge)
+            ageRangeCell.maxSlider.value = Float(maxAge)
             return ageRangeCell
         }
         return cell
@@ -250,6 +263,10 @@ extension SettingsTableViewController {
     }
     
     @objc fileprivate func handleAgeSeekingChange() {
+        evaluateMinMax()
+    }
+    
+    @objc fileprivate func handleMinAgeChange() {
         evaluateMinMax()
     }
 

@@ -25,8 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = HomeViewController()
+//        let registrationController = RegistrationViewController()
+//        let navController = UINavigationController(rootViewController: registrationController)
         
+        window?.rootViewController = HomeViewController()
+
         return true
     }
 

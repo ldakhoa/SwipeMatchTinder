@@ -14,17 +14,18 @@ class CardView: UIView {
     var cardViewModel: CardViewModel! {
         didSet {
             // accessing index 0 will crash if imageNames.count == 0
-            let imageName = cardViewModel.imageNames.first ?? ""
+            let imageName = cardViewModel.imageUrls.first ?? ""
             // load image using url
             if let url = URL(string: imageName) {
                 imageView.sd_setImage(with: url, completed: nil)
+                imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder").withRenderingMode(.alwaysOriginal), options: .continueInBackground, completed: nil)
             }
 
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
             // dummy bars
-            (0..<cardViewModel.imageNames.count).forEach { (_) in
+            (0..<cardViewModel.imageUrls.count).forEach { (_) in
                 let barView = UIView()
                 barView.backgroundColor = barDeselectedColor
                 
@@ -40,7 +41,7 @@ class CardView: UIView {
     fileprivate func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] (index, imageUrl) in
             if let url = URL(string: imageUrl ?? "") {
-                self?.imageView.sd_setImage(with: url, completed: nil)
+                self?.imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder").withRenderingMode(.alwaysOriginal), options: .continueInBackground, completed: nil)
             }
             
             self?.barsStackView.arrangedSubviews.forEach({ (v) in

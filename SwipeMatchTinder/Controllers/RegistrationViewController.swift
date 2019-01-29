@@ -11,6 +11,8 @@ import JGProgressHUD
 
 class RegistrationViewController: UIViewController {
     
+    var delegate: LoginControllerDelegate?
+    
     let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Select Photo", for: .normal)
@@ -28,6 +30,21 @@ class RegistrationViewController: UIViewController {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    let goToLoginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Go to Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+        return button
+    }()
+
+    @objc fileprivate func handleGoToLogin() {
+        let loginController = LoginViewController()
+        loginController.delegate = delegate
+        navigationController?.pushViewController(loginController, animated: true)
     }
     
     let fullNameTextField: CustomTextField = {
@@ -86,6 +103,10 @@ class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: err)
                 return
             }
+            
+            self?.dismiss(animated: true, completion: {
+                self?.delegate?.didFinishLogingIn()
+            })
         }
     }
     
@@ -169,12 +190,16 @@ class RegistrationViewController: UIViewController {
     }
     
     fileprivate func setupLayout() {
+        navigationController?.isNavigationBarHidden = true
+        
         overallStackView.axis = .vertical
         overallStackView.spacing = 10
         
         view.addSubview(overallStackView)
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 40, bottom: 0, right: 40))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(goToLoginButton)
+        goToLoginButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
         
     }
     
@@ -234,6 +259,7 @@ extension RegistrationViewController: UINavigationControllerDelegate, UIImagePic
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         registrationViewModel.bindableImage.value = image
+        registrationViewModel.checkFormValidity()
         dismiss(animated: true, completion: nil)
     }
     
