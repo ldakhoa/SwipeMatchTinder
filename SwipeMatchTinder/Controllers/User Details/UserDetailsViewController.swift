@@ -10,7 +10,7 @@ import UIKit
 
 class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
 
-    let swipingPhotosController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    let swipingPhotosController = SwipingPhotosController()
     
     var cardViewModel: CardViewModel! {
         didSet {
@@ -62,17 +62,15 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: - Layout
     
+    lazy var swipingView = swipingPhotosController.view!
+    
     fileprivate func setupLayout() {
         view.backgroundColor = .white
         
         view.addSubview(scrollView)
         scrollView.fillSuperview()
         
-        let swipingView = swipingPhotosController.view!
-        
         scrollView.addSubview(swipingView)
-        
-        // Auto layout in ScrollView is not same behavior like Normal UIView, so use frame instead of auto layout
         
         scrollView.addSubview(infoLabel)
         infoLabel.anchor(top: swipingView.bottomAnchor, leading: scrollView.leadingAnchor, bottom: nil, trailing: scrollView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
@@ -85,8 +83,7 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        let swipingView = swipingPhotosController.view!
+        // Auto layout in ScrollView is not same behavior like Normal UIView, so use frame instead of auto layout
         swipingView.frame = .init(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraSwipingHeight)
     }
     
@@ -110,12 +107,11 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let changeY = scrollView.contentOffset.y
-        let imageView = swipingPhotosController.view!
-        print(changeY)
         var width = view.frame.width - changeY * 2
         width = max(view.frame.width, width)
         let x = min(0, changeY)
-        imageView.frame = .init(x: x, y: x, width: width, height: width + extraSwipingHeight)
+        
+        swipingView.frame = .init(x: x, y: x, width: width, height: width + extraSwipingHeight)
     }
 
 

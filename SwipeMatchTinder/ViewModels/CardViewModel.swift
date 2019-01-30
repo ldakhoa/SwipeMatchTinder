@@ -37,14 +37,14 @@ class CardViewModel {
     var imageIndexObserver: ( (Int, String?) -> () )?
     
     
-    func advanceToNextPhoto() {
-        imageIndex = min(imageIndex + 1, imageUrls.count - 1)
-        
-    }
-    
-    func goToPreviousPhoto() {
-        imageIndex = max(0, imageIndex - 1)
-    }
+//    func advanceToNextPhoto() {
+//        imageIndex = min(imageIndex + 1, imageUrls.count - 1)
+//
+//    }
+//
+//    func goToPreviousPhoto() {
+//        imageIndex = max(0, imageIndex - 1)
+//    }
 }
 
 

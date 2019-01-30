@@ -44,9 +44,15 @@ struct User: ProducesCardViewModelDelegate {
         attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
         
         var imageUrls = [String]()
+
         if let url = imageUrl1 { imageUrls.append(url) }
-        if let url = imageUrl2 { imageUrls.append(url) }
+        // If user saving image to imageUrl3 and imageUrl2 is empty
+        // we append imageUrl3 to imageUrl2 instead
+        if imageUrl2?.isEmpty == false {
+            imageUrls.append(imageUrl2!)
+        }
         if let url = imageUrl3 { imageUrls.append(url) }
+
         let cardViewModel = CardViewModel(imageUrls: imageUrls, attributedString: attributedText, textAlignment: .left)
         return cardViewModel
     }

@@ -169,6 +169,7 @@
 				02E06C4121FFFD91008B8D1E /* LoginViewController.swift */,
 				0214054021F2D26C00D5DE5E /* HomeViewController.swift */,
 				0214762B21FD645F0087780A /* SettingsTableViewController.swift */,
+				0295EDCC22014B9A0095BE9C /* PhotoController.swift */,
 				0295EDC92200D0510095BE9C /* User Details */,
 			);
 			path = Controllers;
@@ -191,7 +192,6 @@
 			children = (
 				0295EDC522006BEF0095BE9C /* UserDetailsViewController.swift */,
 				0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */,
-				0295EDCC22014B9A0095BE9C /* PhotoController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
