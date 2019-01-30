@@ -15,6 +15,7 @@ struct User: ProducesCardViewModelDelegate {
     var age: Int?
     var profession: String?
     var uid: String?
+    var bio: String?
     var imageUrl1: String?
     var imageUrl2: String?
     var imageUrl3: String?
@@ -31,6 +32,7 @@ struct User: ProducesCardViewModelDelegate {
         self.imageUrl2 = dictionary["imageUrl2"] as? String
         self.imageUrl3 = dictionary["imageUrl3"] as? String
         self.uid = dictionary["uid"] as? String
+        self.bio = dictionary["bio"] as? String
         self.minSeekingAge = dictionary["minSeekingAge"] as? Int
         self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int
     }
@@ -56,7 +58,7 @@ struct User: ProducesCardViewModelDelegate {
         let cardViewModel = CardViewModel(imageUrls: imageUrls, attributedString: attributedText, textAlignment: .left)
         return cardViewModel
     }
-    
+
     
     
 }

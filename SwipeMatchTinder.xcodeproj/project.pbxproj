@@ -29,9 +29,9 @@
 		0221FF5C21F4E3DD00EAD109 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */; };
 		0221FF5E21F4EA4B00EAD109 /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */; };
 		0295EDC622006BEF0095BE9C /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDC522006BEF0095BE9C /* UserDetailsViewController.swift */; };
-		0295EDC82200CF830095BE9C /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDC72200CF830095BE9C /* UserDetailsViewModel.swift */; };
 		0295EDCB2200D0780095BE9C /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */; };
 		0295EDCD22014B9A0095BE9C /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDCC22014B9A0095BE9C /* PhotoController.swift */; };
+		0295EDED2201F1A60095BE9C /* BioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDEC2201F1A60095BE9C /* BioCell.swift */; };
 		029D49F021F786BF0021328D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49EF21F786BF0021328D /* RegistrationViewController.swift */; };
 		029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F121F78B3D0021328D /* CustomTextField.swift */; };
 		029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029D49F421F848F00021328D /* GoogleService-Info.plist */; };
@@ -67,9 +67,9 @@
 		0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		0295EDC522006BEF0095BE9C /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
-		0295EDC72200CF830095BE9C /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
 		0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		0295EDCC22014B9A0095BE9C /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
+		0295EDEC2201F1A60095BE9C /* BioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioCell.swift; sourceTree = "<group>"; };
 		029D49EF21F786BF0021328D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		029D49F121F78B3D0021328D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		029D49F421F848F00021328D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -149,6 +149,7 @@
 				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
 				0214762F21FD89480087780A /* SettingsCell.swift */,
 				0214763521FDFA730087780A /* AgeRangeCell.swift */,
+				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,7 +183,6 @@
 				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
 				02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */,
 				0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */,
-				0295EDC72200CF830095BE9C /* UserDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -392,8 +392,8 @@
 				0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */,
 				0206859321FEA71600416D50 /* Firestore+Utils.swift in Sources */,
 				029D49F921FAB0030021328D /* Bindable.swift in Sources */,
+				0295EDED2201F1A60095BE9C /* BioCell.swift in Sources */,
 				029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */,
-				0295EDC82200CF830095BE9C /* UserDetailsViewModel.swift in Sources */,
 				029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */,
 				0214055821F2D6C300D5DE5E /* Extensions+UIView.swift in Sources */,
 				0206859121FE95B400416D50 /* AgeRangeLabel.swift in Sources */,

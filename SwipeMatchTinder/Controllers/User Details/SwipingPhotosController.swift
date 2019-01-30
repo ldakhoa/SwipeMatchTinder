@@ -108,6 +108,7 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
                 barsStackView.arrangedSubviews[previousIndex].backgroundColor = .white
             }
         }
+        
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {

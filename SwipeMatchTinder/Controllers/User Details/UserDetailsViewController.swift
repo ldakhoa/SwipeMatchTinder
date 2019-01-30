@@ -18,7 +18,7 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
             swipingPhotosController.cardViewModel = cardViewModel
         }
     }
-    
+
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.alwaysBounceVertical = true

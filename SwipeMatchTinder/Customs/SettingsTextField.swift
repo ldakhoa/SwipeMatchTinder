@@ -21,3 +21,14 @@ class SettingsTextField: UITextField {
         return bounds.insetBy(dx: 24, dy: 0)
     }
 }
+
+class BioSettingsTextView: UITextView {
+    override var intrinsicContentSize: CGSize {
+        return .init(width: 0, height: 44)
+    }
+    
+//    editRech
+    
+    
+    
+}

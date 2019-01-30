@@ -14,6 +14,7 @@ class AgeRangeCell: UITableViewCell {
         let slider = UISlider()
         slider.minimumValue = 18
         slider.maximumValue = 100
+        slider.minimumTrackTintColor = #colorLiteral(red: 0.9692050815, green: 0.3088847697, blue: 0.6212263703, alpha: 1)
         return slider
     }()
 
@@ -21,6 +22,7 @@ class AgeRangeCell: UITableViewCell {
         let slider = UISlider()
         slider.minimumValue = 18
         slider.maximumValue = 100
+        slider.minimumTrackTintColor = #colorLiteral(red: 0.9692050815, green: 0.3088847697, blue: 0.6212263703, alpha: 1)
         return slider
     }()
     

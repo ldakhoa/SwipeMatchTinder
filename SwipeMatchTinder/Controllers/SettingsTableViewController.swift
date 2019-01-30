@@ -49,6 +49,8 @@ class SettingsTableViewController: UITableViewController {
         setupNavigationItems()
         setupTableView()
         fetchCurrentUser()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
     }
     
     fileprivate func setupTableView() {
@@ -81,6 +83,7 @@ class SettingsTableViewController: UITableViewController {
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
+            "bio": user?.bio ?? "",
             "profession": user?.profession ?? "",
             "minSeekingAge": user?.minSeekingAge ?? -1,
             "maxSeekingAge": user?.maxSeekingAge ?? -1,
@@ -95,7 +98,6 @@ class SettingsTableViewController: UITableViewController {
                 return
             }
             self.dismiss(animated: true, completion: {
-                print("Dimissal complete")
                 self.delegate?.didSaveSettings()
             })
         }
@@ -223,13 +225,25 @@ extension SettingsTableViewController {
             cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
         case 3:
             cell.textField.placeholder = "Enter Age"
+            cell.textField.keyboardType = .numberPad
             cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
         default:
+            Void()
             // TODO: - Dynamic height for BioText
-            cell.textField.placeholder = "Enter Bio"
+        }
+        if indexPath.section == 4 {
+            let bioCell = BioCell(style: .default, reuseIdentifier: nil)
+            bioCell.heightAnchor.constraint(equalToConstant: 100)
+            let bioTextView = bioCell.textView
+            bioTextView.delegate = self
+            bioTextView.isScrollEnabled = true
+            bioTextView.text = user?.bio
+            textViewDidChange(bioTextView)
+            
+            return bioCell
         }
         // age range cell
         if indexPath.section == 5 {
@@ -238,7 +252,7 @@ extension SettingsTableViewController {
             ageRangeCell.maxSlider.addTarget(self, action: #selector(handleAgeSeekingChange), for: .valueChanged)
             // we need tp set up the labels on our cell here
             let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
-            let maxAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
+            let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
             ageRangeCell.minLabel.text = "Min \(minAge)"
             ageRangeCell.maxLabel.text = "Max \(maxAge)"
             ageRangeCell.minSlider.value = Float(minAge)
@@ -247,6 +261,11 @@ extension SettingsTableViewController {
         }
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
     
     // MARK: - Handle Change
     
@@ -260,6 +279,10 @@ extension SettingsTableViewController {
     
     @objc fileprivate func handleAgeChange(textField: UITextField) {
         self.user?.age = Int(textField.text ?? "")
+    }
+    
+    @objc fileprivate func handleBioChange(textField: UITextField) {
+        self.user?.bio = textField.text
     }
     
     @objc fileprivate func handleAgeSeekingChange() {
@@ -306,7 +329,6 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
                 return
             }
             
-            print("Finish")
             ref.downloadURL(completion: { (url, err) in
                 hud.dismiss()
                 if let err = err {
@@ -324,6 +346,44 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
                 
             })
         }
+    }
+    
+}
+
+extension SettingsTableViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.officialApplePlaceholderGray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Enter Bio"
+            textView.textColor = UIColor.officialApplePlaceholderGray
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+            }
+            
+        }
+
+        
+        if textView.textColor == UIColor.officialApplePlaceholderGray {
+            textView.text = nil
+            textView.textColor = .black
+        }
+        
+        self.user?.bio = textView.text
+        
     }
     
 }

@@ -10,13 +10,12 @@ import UIKit
 
 class SettingsCell: UITableViewCell {
 
-
     let textField: UITextField = {
         let tf = SettingsTextField()
         tf.placeholder = "Enter Name"
         return tf
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         

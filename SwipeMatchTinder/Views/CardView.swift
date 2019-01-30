@@ -7,25 +7,21 @@
 //
 
 import UIKit
-import SDWebImage
 
 protocol CardViewDelegate {
     func didTapMoreInfo(cardViewModel: CardViewModel)
+    func didRemoveCard(cardView: CardView)
 }
 
 class CardView: UIView {
+    
+    var nextCardView: CardView?
     
     var delegate: CardViewDelegate?
     
     var cardViewModel: CardViewModel! {
         didSet {
-            // accessing index 0 will crash if imageNames.count == 0
-//            let imageName = cardViewModel.imageUrls.first ?? ""
-            // load image using url
-//            if let url = URL(string: imageName) {
-//                imageView.sd_setImage(with: url, completed: nil)
-//                imageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "photo_placeholder").withRenderingMode(.alwaysOriginal), options: .continueInBackground, completed: nil)
-//            }
+
             swipingPhotosController.cardViewModel = self.cardViewModel
 
             informationLabel.attributedText = cardViewModel.attributedString
@@ -75,7 +71,7 @@ class CardView: UIView {
         return button
     }()
     
-    @objc fileprivate func handleMoreInfo() {
+    @objc func handleMoreInfo() {
         self.delegate?.didTapMoreInfo(cardViewModel: self.cardViewModel)
     }
     
@@ -187,6 +183,9 @@ class CardView: UIView {
             self.transform = .identity
             if shouldDismissCard {
                 self.removeFromSuperview()
+                
+                // reset topCardView inside of HomeController
+                self.delegate?.didRemoveCard(cardView: self)
             }
         }
     }
