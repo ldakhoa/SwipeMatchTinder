@@ -50,5 +50,8 @@ struct User: ProducesCardViewModelDelegate {
         let cardViewModel = CardViewModel(imageUrls: imageUrls, attributedString: attributedText, textAlignment: .left)
         return cardViewModel
     }
+    
+    
+    
 }
 

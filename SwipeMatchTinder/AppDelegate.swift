@@ -25,11 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-//        let registrationController = RegistrationViewController()
-//        let navController = UINavigationController(rootViewController: registrationController)
-        
         window?.rootViewController = HomeViewController()
-
+//        window?.rootViewController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
         return true
     }
 

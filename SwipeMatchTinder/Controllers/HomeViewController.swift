@@ -54,6 +54,8 @@ class HomeViewController: UIViewController {
     }
     
     @objc fileprivate func handleRefresh() {
+        hud.textLabel.text = "Refresh"
+        hud.show(in: view)
         fetchUserFromFirestore()
     }
 
@@ -75,16 +77,6 @@ class HomeViewController: UIViewController {
     
     // MARK: - Fetch from Firestore
     
-    var lastFetchedUser: User?
-    
-    fileprivate func setupCardFromUser(user: User) {
-        let cardView = CardView(frame: .zero)
-        cardView.cardViewModel = user.toCardViewModel()
-        cardsDeckView.addSubview(cardView)
-        cardsDeckView.sendSubviewToBack(cardView)
-        cardView.fillSuperview()
-    }
-    
     fileprivate func fetchUserFromFirestore() {
 
         let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
@@ -101,8 +93,6 @@ class HomeViewController: UIViewController {
             snapshot?.documents.forEach({ (documentSnapshot) in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-//                self.cardViewModels.append(user.toCardViewModel())
-//                self.lastFetchedUser = user
                 let currentUser = Auth.auth().currentUser?.uid
                 if user.uid != currentUser {
                     self.setupCardFromUser(user: user)
@@ -112,6 +102,14 @@ class HomeViewController: UIViewController {
         }
     }
     
+    fileprivate func setupCardFromUser(user: User) {
+        let cardView = CardView(frame: .zero)
+        cardView.delegate = self
+        cardView.cardViewModel = user.toCardViewModel()
+        cardsDeckView.addSubview(cardView)
+        cardsDeckView.sendSubviewToBack(cardView)
+        cardView.fillSuperview()
+    }
     
     fileprivate func fetchCurrentUser() {
         hud.textLabel.text = "Loading"
@@ -141,3 +139,12 @@ extension HomeViewController: SettingsControllerDelegate, LoginControllerDelegat
     }
 }
 
+extension HomeViewController: CardViewDelegate {
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
+        
+        let userDetailsController = UserDetailsViewController()
+        userDetailsController.cardViewModel = cardViewModel
+        present(userDetailsController, animated: true, completion: nil)
+    }
+    
+}
