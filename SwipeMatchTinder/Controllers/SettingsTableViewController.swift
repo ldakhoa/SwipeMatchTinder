@@ -12,10 +12,9 @@ import JGProgressHUD
 import SDWebImage
 
 protocol SettingsControllerDelegate {
-    
     func didSaveSettings()
-    
 }
+
 class SettingsTableViewController: UITableViewController {
     
     var user: User?
@@ -43,6 +42,8 @@ class SettingsTableViewController: UITableViewController {
         return button
     }
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,11 +62,11 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate func setupNavigationItems() {
         navigationItem.title = "Settings"
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
-            UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         ]
     }
     
@@ -101,13 +102,6 @@ class SettingsTableViewController: UITableViewController {
                 self.delegate?.didSaveSettings()
             })
         }
-    }
-    
-    @objc fileprivate func handleLogout() {
-        
-        try? Auth.auth().signOut()
-        dismiss(animated: true, completion: nil)
-        
     }
     
     fileprivate func fetchCurrentUser() {
@@ -176,6 +170,7 @@ extension SettingsTableViewController {
         
         let headerLabel = HeaderLabel()
         headerLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        headerLabel.textColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
         
         switch section {
         case 1:
@@ -186,8 +181,10 @@ extension SettingsTableViewController {
             headerLabel.text = "Age"
         case 4:
             headerLabel.text = "Bio"
-        default:
+        case 5:
             headerLabel.text = "Seeking Age Range"
+        default:
+            Void()
         }
         
         return headerLabel
@@ -201,7 +198,7 @@ extension SettingsTableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -236,12 +233,12 @@ extension SettingsTableViewController {
         }
         if indexPath.section == 4 {
             let bioCell = BioCell(style: .default, reuseIdentifier: nil)
-            bioCell.heightAnchor.constraint(equalToConstant: 100)
-            let bioTextView = bioCell.textView
-            bioTextView.delegate = self
-            bioTextView.isScrollEnabled = true
-            bioTextView.text = user?.bio
-            textViewDidChange(bioTextView)
+//            bioCell.heightAnchor.constraint(equalToConstant: 100)
+//            let bioTextView = bioCell.textView
+//            bioTextView.delegate = self
+//            bioTextView.isScrollEnabled = true
+//            bioTextView.text = user?.bio
+//            textViewDidChange(bioTextView)
             
             return bioCell
         }
@@ -258,6 +255,11 @@ extension SettingsTableViewController {
             ageRangeCell.minSlider.value = Float(minAge)
             ageRangeCell.maxSlider.value = Float(maxAge)
             return ageRangeCell
+        }
+        if indexPath.section == 6 {
+            let logoutCell = LogoutCell(style: .default, reuseIdentifier: nil)
+            logoutCell.logoutButton.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+            return logoutCell
         }
         return cell
     }
@@ -303,6 +305,22 @@ extension SettingsTableViewController {
         ageRangeCell.maxLabel.text = "Max \(maxValue)"
         user?.minSeekingAge = minValue
         user?.maxSeekingAge = maxValue
+    }
+    
+    @objc fileprivate func handleLogout() {
+        let alertController = UIAlertController(title: "Log out of \(user?.name ?? "")?", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (_) in
+            try? Auth.auth().signOut()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            
+        }))
+        alertController.view.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
+        self.present(alertController, animated: true)
+
+        
     }
     
 }

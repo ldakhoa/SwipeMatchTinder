@@ -32,6 +32,7 @@
 		0295EDCB2200D0780095BE9C /* SwipingPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */; };
 		0295EDCD22014B9A0095BE9C /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDCC22014B9A0095BE9C /* PhotoController.swift */; };
 		0295EDED2201F1A60095BE9C /* BioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDEC2201F1A60095BE9C /* BioCell.swift */; };
+		0295EDEF220218410095BE9C /* LogoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295EDEE220218410095BE9C /* LogoutCell.swift */; };
 		029D49F021F786BF0021328D /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49EF21F786BF0021328D /* RegistrationViewController.swift */; };
 		029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F121F78B3D0021328D /* CustomTextField.swift */; };
 		029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029D49F421F848F00021328D /* GoogleService-Info.plist */; };
@@ -70,6 +71,7 @@
 		0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
 		0295EDCC22014B9A0095BE9C /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		0295EDEC2201F1A60095BE9C /* BioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioCell.swift; sourceTree = "<group>"; };
+		0295EDEE220218410095BE9C /* LogoutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCell.swift; sourceTree = "<group>"; };
 		029D49EF21F786BF0021328D /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		029D49F121F78B3D0021328D /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		029D49F421F848F00021328D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				0214762F21FD89480087780A /* SettingsCell.swift */,
 				0214763521FDFA730087780A /* AgeRangeCell.swift */,
 				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
+				0295EDEE220218410095BE9C /* LogoutCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				0214763621FDFA730087780A /* AgeRangeCell.swift in Sources */,
 				0214055921F2D6C300D5DE5E /* Extensions+UIColor.swift in Sources */,
 				02E06C4421FFFFE6008B8D1E /* LoginViewModel.swift in Sources */,
+				0295EDEF220218410095BE9C /* LogoutCell.swift in Sources */,
 				0214762E21FD85860087780A /* CustomImagePickerController.swift in Sources */,
 				0221FF5C21F4E3DD00EAD109 /* CardViewModel.swift in Sources */,
 				0214763421FD8E410087780A /* HeaderLabel.swift in Sources */,

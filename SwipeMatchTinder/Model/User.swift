@@ -40,10 +40,12 @@ struct User: ProducesCardViewModelDelegate {
     func toCardViewModel() -> CardViewModel {
         let attributedText = NSMutableAttributedString(string: name ?? "", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
         let ageString = age != nil ? "\(age!)" : "N\\A"
+        attributedText.append(NSAttributedString(string: " \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 26, weight: .regular)]))
         
-        attributedText.append(NSAttributedString(string: " \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
         let professionString = profession != nil ? profession! : "Not available" 
-        attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
+        attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .medium)]))
+        let bioString = bio != nil ? bio! : "Not available"
+        attributedText.append(NSAttributedString(string: "\n\(bioString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
         
         var imageUrls = [String]()
 
