@@ -95,7 +95,9 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
         
         if let index = controllers.firstIndex(of: currentController) {
             barsStackView.arrangedSubviews.forEach({$0.backgroundColor = barDeselectedColor})
-            if gesture.location(in: self.view).x > view.frame.width / 2 {
+            let tapLocation = gesture.location(in: self.view)
+            let shouldAdvancePhoto = tapLocation.x > view.frame.width / 2 ? true : false
+            if shouldAdvancePhoto {
                 let nextIndex = min(index + 1, controllers.count - 1)
                 let nextController = controllers[nextIndex]
                 setViewControllers([nextController], direction: .forward, animated: false, completion: nil)
@@ -103,14 +105,13 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
                 barsStackView.arrangedSubviews[nextIndex].backgroundColor = .white
             } else {
                 let previousIndex = max(0, index - 1)
-                let nextController = controllers[previousIndex]
-                setViewControllers([nextController], direction: .forward, animated: false, completion: nil)
+                let previousController = controllers[previousIndex]
+                setViewControllers([previousController], direction: .forward, animated: false, completion: nil)
                 barsStackView.arrangedSubviews[previousIndex].backgroundColor = .white
             }
         }
-        
     }
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? -1
         if index == controllers.count - 1 { return nil }

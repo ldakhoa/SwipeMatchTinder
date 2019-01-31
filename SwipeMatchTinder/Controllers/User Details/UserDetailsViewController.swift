@@ -76,9 +76,6 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.addSubview(dismissButton)
         dismissButton.anchor(top: swipingView.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 24), size: .init(width: 50, height: 50))
-        
-//        scrollView.addSubview(bioLabel)
-//        bioLabel.anchor(top: infoLabel.bottomAnchor, leading: scrollView.leadingAnchor, bottom: nil, trailing: scrollView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
     }
     
     fileprivate let extraSwipingHeight: CGFloat = 80

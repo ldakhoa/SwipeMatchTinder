@@ -50,8 +50,8 @@ class SettingsTableViewController: UITableViewController {
         setupNavigationItems()
         setupTableView()
         fetchCurrentUser()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.dataSource = self
+
     }
     
     fileprivate func setupTableView() {
@@ -233,13 +233,8 @@ extension SettingsTableViewController {
         }
         if indexPath.section == 4 {
             let bioCell = BioCell(style: .default, reuseIdentifier: nil)
-//            bioCell.heightAnchor.constraint(equalToConstant: 100)
-//            let bioTextView = bioCell.textView
-//            bioTextView.delegate = self
-//            bioTextView.isScrollEnabled = true
-//            bioTextView.text = user?.bio
-//            textViewDidChange(bioTextView)
-            
+            let bioTextView = bioCell.textView
+            bioTextView.text = user?.bio
             return bioCell
         }
         // age range cell
@@ -314,9 +309,7 @@ extension SettingsTableViewController {
             self.dismiss(animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            
-        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertController.view.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
         self.present(alertController, animated: true)
 
@@ -361,48 +354,10 @@ extension SettingsTableViewController: UIImagePickerControllerDelegate, UINaviga
                     self.user?.imageUrl3 = url?.absoluteString
                 }
                 
-                
             })
         }
     }
     
 }
 
-extension SettingsTableViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.officialApplePlaceholderGray {
-            textView.text = nil
-            textView.textColor = .black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "Enter Bio"
-            textView.textColor = UIColor.officialApplePlaceholderGray
-        }
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: view.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-            
-        }
-
-        
-        if textView.textColor == UIColor.officialApplePlaceholderGray {
-            textView.text = nil
-            textView.textColor = .black
-        }
-        
-        self.user?.bio = textView.text
-        
-    }
-    
-}
 

@@ -44,8 +44,8 @@ struct User: ProducesCardViewModelDelegate {
         
         let professionString = profession != nil ? profession! : "Not available" 
         attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .medium)]))
-        let bioString = bio != nil ? bio! : "Not available"
-        attributedText.append(NSAttributedString(string: "\n\(bioString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
+//        let bioString = bio != nil ? bio! : "Not available"
+//        attributedText.append(NSAttributedString(string: "\n\(bioString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .medium)]))
         
         var imageUrls = [String]()
 
@@ -57,7 +57,7 @@ struct User: ProducesCardViewModelDelegate {
         }
         if let url = imageUrl3 { imageUrls.append(url) }
 
-        let cardViewModel = CardViewModel(imageUrls: imageUrls, attributedString: attributedText, textAlignment: .left)
+        let cardViewModel = CardViewModel(uid: self.uid ?? "", imageUrls: imageUrls, attributedString: attributedText, textAlignment: .left)
         return cardViewModel
     }
 
