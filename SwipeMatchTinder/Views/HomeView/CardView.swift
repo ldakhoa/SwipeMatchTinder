@@ -11,7 +11,6 @@ import UIKit
 protocol CardViewDelegate {
     func didTapMoreInfo(cardViewModel: CardViewModel)
     func didRemoveCard(cardView: CardView)
-//    func
 }
 
 class CardView: UIView {

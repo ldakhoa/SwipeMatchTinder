@@ -40,6 +40,9 @@
 		029D49F921FAB0030021328D /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F821FAB0030021328D /* Bindable.swift */; };
 		02E06C4221FFFD91008B8D1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E06C4121FFFD91008B8D1E /* LoginViewController.swift */; };
 		02E06C4421FFFFE6008B8D1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */; };
+		02E950692203F60B007B211C /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E950682203F60B007B211C /* MatchView.swift */; };
+		02E9506D2203FD5D007B211C /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9506C2203FD5D007B211C /* SendMessageButton.swift */; };
+		02E9506F2204005E007B211C /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E9506E2204005E007B211C /* KeepSwipingButton.swift */; };
 		5B0D5F8666B5C8E48E3D8846 /* Pods_SwipeMatchTinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +82,9 @@
 		029D49F821FAB0030021328D /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		02E06C4121FFFD91008B8D1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		02E950682203F60B007B211C /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		02E9506C2203FD5D007B211C /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
+		02E9506E2204005E007B211C /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
 		55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwipeMatchTinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		667FCAC3EA8E7DA1F720587F /* Pods-SwipeMatchTinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchTinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder.release.xcconfig"; sourceTree = "<group>"; };
 		BE0B1A0186E3A69C0FD475A5 /* Pods-SwipeMatchTinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwipeMatchTinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwipeMatchTinder/Pods-SwipeMatchTinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -146,13 +152,9 @@
 		0214055A21F2DAD300D5DE5E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */,
-				0214055F21F2F34300D5DE5E /* CardView.swift */,
-				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
-				0214762F21FD89480087780A /* SettingsCell.swift */,
-				0214763521FDFA730087780A /* AgeRangeCell.swift */,
-				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
-				0295EDEE220218410095BE9C /* LogoutCell.swift */,
+				02E9506A2203F610007B211C /* SettingsView */,
+				02E9506B2203F636007B211C /* HomeView */,
+				02E950682203F60B007B211C /* MatchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,8 +209,31 @@
 				0214763121FD8E170087780A /* SettingsTextField.swift */,
 				0214763321FD8E410087780A /* HeaderLabel.swift */,
 				0206859021FE95B400416D50 /* AgeRangeLabel.swift */,
+				02E9506C2203FD5D007B211C /* SendMessageButton.swift */,
+				02E9506E2204005E007B211C /* KeepSwipingButton.swift */,
 			);
 			path = Customs;
+			sourceTree = "<group>";
+		};
+		02E9506A2203F610007B211C /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				0214762F21FD89480087780A /* SettingsCell.swift */,
+				0214763521FDFA730087780A /* AgeRangeCell.swift */,
+				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
+				0295EDEE220218410095BE9C /* LogoutCell.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		02E9506B2203F636007B211C /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */,
+				0214055F21F2F34300D5DE5E /* CardView.swift */,
+				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
+			);
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		414EEDBC3FC111606BF20693 /* Frameworks */ = {
@@ -394,9 +419,11 @@
 				0221FF5821F4DD4300EAD109 /* User.swift in Sources */,
 				0214055E21F2E09300D5DE5E /* TopNavigationStackView.swift in Sources */,
 				0206859321FEA71600416D50 /* Firestore+Utils.swift in Sources */,
+				02E950692203F60B007B211C /* MatchView.swift in Sources */,
 				029D49F921FAB0030021328D /* Bindable.swift in Sources */,
 				0295EDED2201F1A60095BE9C /* BioCell.swift in Sources */,
 				029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */,
+				02E9506F2204005E007B211C /* KeepSwipingButton.swift in Sources */,
 				029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */,
 				0214055821F2D6C300D5DE5E /* Extensions+UIView.swift in Sources */,
 				0206859121FE95B400416D50 /* AgeRangeLabel.swift in Sources */,
@@ -404,6 +431,7 @@
 				0214055921F2D6C300D5DE5E /* Extensions+UIColor.swift in Sources */,
 				02E06C4421FFFFE6008B8D1E /* LoginViewModel.swift in Sources */,
 				0295EDEF220218410095BE9C /* LogoutCell.swift in Sources */,
+				02E9506D2203FD5D007B211C /* SendMessageButton.swift in Sources */,
 				0214762E21FD85860087780A /* CustomImagePickerController.swift in Sources */,
 				0221FF5C21F4E3DD00EAD109 /* CardViewModel.swift in Sources */,
 				0214763421FD8E410087780A /* HeaderLabel.swift in Sources */,
