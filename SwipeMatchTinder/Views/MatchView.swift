@@ -87,6 +87,7 @@ class MatchView: UIView {
     fileprivate let keepSwipingButton: UIButton = {
         let button = KeepSwipingButton(type: .system)
         button.setTitle("Keep Swiping", for: .normal)
+        button.addTarget(self, action: #selector(handleKeepSwiping), for: .touchUpInside)
         button.setTitleColor(.white, for: .normal)
         return button
     }()
@@ -102,10 +103,7 @@ class MatchView: UIView {
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     fileprivate func setupBlurView() {
-        
-        
         visualEffectView.alpha = 0
-        visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
         
         addSubview(visualEffectView)
         visualEffectView.fillSuperview()
@@ -118,7 +116,7 @@ class MatchView: UIView {
         }
     }
 
-    @objc fileprivate func handleTapDismiss() {
+    @objc fileprivate func handleKeepSwiping() {
         
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.alpha = 0

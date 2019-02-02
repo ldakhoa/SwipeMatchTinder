@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
     let passwordTextField: CustomTextField = {
         let tf = CustomTextField(padding: 24)
         tf.placeholder = "Enter password"
-//        tf.isSecureTextEntry = true
+        tf.isSecureTextEntry = true
         tf.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return tf
     }()

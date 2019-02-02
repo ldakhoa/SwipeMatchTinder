@@ -99,10 +99,6 @@ class HomeViewController: UIViewController {
                         print("Failed to save swipe data: \(err)")
                         return
                     }
-                    
-//                    if didLike == 1 {
-//                        self.checkIfMatchExists(cardUID: cardUID)
-//                    }
                 }
             } else {
                 swipesCollection.setData(documentData) { (err) in
@@ -110,10 +106,6 @@ class HomeViewController: UIViewController {
                         print("Failed to save swipe data: \(err)")
                         return
                     }
-                    
-//                    if didLike == 1 {
-//                        self.checkIfMatchExists(cardUID: cardUID)
-//                    }
                 }
             }
         }
@@ -226,7 +218,6 @@ class HomeViewController: UIViewController {
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
-//                let hasNotSwipedBefore = true
                 if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView

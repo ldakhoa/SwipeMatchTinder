@@ -229,7 +229,6 @@ extension SettingsTableViewController {
             }
         default:
             Void()
-            // TODO: - Dynamic height for BioText
         }
         if indexPath.section == 4 {
             let bioCell = BioCell(style: .default, reuseIdentifier: nil)
