@@ -25,8 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = HomeViewController()
-//        window?.rootViewController = SwipingPhotosController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
+//        window?.rootViewController = UINavigationController(rootViewController: MatchesMassagesController(collectionViewLayout: UICollectionViewFlowLayout()))
+        
         
         return true
     }

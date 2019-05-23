@@ -24,18 +24,26 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
-        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
-        bottomControls.likeButton.addTarget(self, action: #selector(handeLike), for: .touchUpInside)
-        bottomControls.dislikeButton.addTarget(self, action: #selector(handeDisLike), for: .touchUpInside)
+        // Fixes issue when switch to MessagesController
+        navigationController?.navigationBar.isHidden = true
         
+        addButtonsAction()
         setupLayout()
         fetchCurrentUser()
         
     }
     
+    fileprivate func addButtonsAction() {
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        topStackView.messageButton.addTarget(self, action: #selector(handleMessages), for: .touchUpInside)
+        bottomControls.refreshButton.addTarget(self, action: #selector(handleRefresh), for: .touchUpInside)
+        bottomControls.likeButton.addTarget(self, action: #selector(handeLike), for: .touchUpInside)
+        bottomControls.dislikeButton.addTarget(self, action: #selector(handeDisLike), for: .touchUpInside)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         if Auth.auth().currentUser == nil {
             let registrationController = RegistrationViewController()
             registrationController.delegate = self
@@ -155,7 +163,6 @@ class HomeViewController: UIViewController {
         
         CATransaction.setCompletionBlock {
             cardView?.removeFromSuperview()
-            
         }
         
         cardView?.layer.add(translationAnimation, forKey: "translation")
@@ -170,6 +177,11 @@ class HomeViewController: UIViewController {
     func didRemoveCard(cardView: CardView) {
         self.topCardView?.removeFromSuperview()
         self.topCardView = self.topCardView?.nextCardView
+    }
+    
+    @objc fileprivate func handleMessages() {
+        let vc = MatchesMassagesController()
+        navigationController?.pushViewController(vc, animated: true)        
     }
 
     // MARK: - Layout
@@ -195,8 +207,6 @@ class HomeViewController: UIViewController {
         let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
         let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
         
-        
-        
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         
         topCardView = nil // Activate like and dislike button again went user save
@@ -218,7 +228,8 @@ class HomeViewController: UIViewController {
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
-                if isNotCurrentUser && hasNotSwipedBefore {
+//                if isNotCurrentUser && hasNotSwipedBefore {
+                if isNotCurrentUser {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
                     previousCardView = cardView
