@@ -133,6 +133,22 @@ class HomeViewController: UIViewController {
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
                 self.presentMatchView(cardUID: cardUID)
+                guard let cardUser = self.users[cardUID] else { return }
+                let data: [String: Any] = ["name": cardUser.name ?? "", "profileImageUrl": cardUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(data, completion: { (err) in
+                    if let err = err {
+                        print("Failed to save match info: \(err)")
+                    }
+                })
+                
+                guard let currentUser = self.user else { return }
+                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
+                    if let err = err {
+                        print("Failed to save match info: \(err)")
+                    }
+                })
+                
             }
         }
     }
@@ -201,13 +217,14 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Fetch from Firestore
+    var users = [String: User]()
     
     fileprivate func fetchUserFromFirestore() {
 
         let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
         let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
         
-        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge).limit(to: 10)
         
         topCardView = nil // Activate like and dislike button again went user save
         query.getDocuments { (snapshot, err) in
@@ -225,6 +242,7 @@ class HomeViewController: UIViewController {
                 
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
+                self.users[user.uid ?? ""] = user
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
@@ -242,7 +260,7 @@ class HomeViewController: UIViewController {
             })
         }
     }
-    
+
     fileprivate func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.delegate = self
