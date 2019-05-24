@@ -16,13 +16,6 @@ class MatchesMassagesController: LBTAListController<MatchCell, Match>, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        items = [
-//            .init(name: "Test", profileImageUrl: "https://firebasestorage.googleapis.com/v0/b/swipematchtinder.appspot.com/o/images%2F6A5A42DA-534B-4B95-BB84-83488AE656C0?alt=media&token=85e48e4f-46d4-41e0-827f-f20f6b1a99ee"),
-//            .init(name: "1", profileImageUrl: "profile url"),
-//            .init(name: "2", profileImageUrl: "profile url"),
-//
-//        ]
-        
         setupCollectionView()
         
         navigationController?.navigationBar.isHidden = true
@@ -73,6 +66,12 @@ class MatchesMassagesController: LBTAListController<MatchCell, Match>, UICollect
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .init(top: 16, left: 0, bottom: 16, right: 0)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let match = items[indexPath.item]
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
     
 }
