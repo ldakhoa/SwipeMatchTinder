@@ -21,15 +21,36 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
         super.init()
     }
     
+    // MARK: - Input accessory view
+
+    
+    lazy var customInputAccessView: UIView = {
+        let view = CustomInputAccessView()
+        return CustomInputAccessView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+    }()
+    
+    
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return customInputAccessView
+        }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
         
         items = [
-            .init(text: "Hello"),
-            .init(text: "Hello"),
-            .init(text: "Hello"),
+            .init(text: "Hello HelloHelloHelloHelloHelloHello Hello Hello Hello Hello Hello HelloHello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello HelloHello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Khoa ne", isFromCurrentUser: true),
+            .init(text: "Hello", isFromCurrentUser: false),
+            .init(text: "Hello My Van", isFromCurrentUser: true),
+            .init(text: "Hello Khoa, I'm Van, I'm from Vietnam, my favorite hobby is Sing, Cook, learn something new, I am try to be a singer and can perform in big big stage, or to be a direction of file in HollyWood, or to be a direction of file in HollyWood, or to be a direction of file in HollyWood, or to be a direction of file in HollyWood, that it.", isFromCurrentUser: false),
         ]
         
         setupLayout()
@@ -40,11 +61,18 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     fileprivate func setupCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.contentInset.top = navBarHeight
+        collectionView.alwaysBounceVertical = true
+        collectionView.scrollIndicatorInsets.top = navBarHeight
+        collectionView.keyboardDismissMode = .interactive
     }
     
     fileprivate func setupLayout() {
         view.addSubview(messagesNavBar)
         messagesNavBar.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .zero, size: .init(width: 0, height: navBarHeight))
+        
+        let statusBarCover = UIView(backgroundColor: .white)
+        view.addSubview(statusBarCover)
+        statusBarCover.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, trailing: view.trailingAnchor)
     }
     
     @objc fileprivate func handleBack() {
@@ -52,7 +80,12 @@ class ChatLogController: LBTAListController<MessageCell, Message>, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 100)
+        let estimatedSizeCell = MessageCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
+        estimatedSizeCell.item = self.items[indexPath.item]
+        estimatedSizeCell.layoutIfNeeded()
+        let estimatedSize = estimatedSizeCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
+        
+        return .init(width: view.frame.width, height: estimatedSize.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

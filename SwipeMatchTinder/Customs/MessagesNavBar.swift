@@ -42,9 +42,9 @@ class MessagesNavBar: UIView {
             alignment: .center
         )
         
-        hstack(backButton,
+        hstack(backButton.withWidth(50),
                middleStack,
-               flagButton).withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
+               flagButton).withMargins(.init(top: 0, left: 4, bottom: 0, right: 16))
         setupShadow(opacity: 0.2, radius: 8, offset: .init(width: 0, height: 10), color: .init(white: 0, alpha: 0.3))
         
     }
