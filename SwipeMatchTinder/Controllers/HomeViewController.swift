@@ -135,15 +135,15 @@ class HomeViewController: UIViewController {
                 self.presentMatchView(cardUID: cardUID)
                 guard let cardUser = self.users[cardUID] else { return }
                 let data: [String: Any] = ["name": cardUser.name ?? "", "profileImageUrl": cardUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
-                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(data, completion: { (err) in
+                Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(uid).collection("matches").document(cardUID).setData(data, completion: { (err) in
                     if let err = err {
                         print("Failed to save match info: \(err)")
                     }
                 })
                 
                 guard let currentUser = self.user else { return }
-                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
-                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
+                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": currentUser.uid, "timestamp": Timestamp(date: Date())]
+                Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(uid).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
                     if let err = err {
                         print("Failed to save match info: \(err)")
                     }

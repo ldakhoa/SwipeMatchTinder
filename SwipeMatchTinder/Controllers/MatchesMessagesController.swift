@@ -39,7 +39,7 @@ class MatchesMassagesController: LBTAListController<MatchCell, Match>, UICollect
     
     fileprivate func fetchMatches() {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("matches_messages").document(currentUserId).collection("matches").getDocuments { (querySnapshot, err) in
+        Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection("matches").getDocuments { (querySnapshot, err) in
             
             if let err = err {
                 print("Failed to fetch matches: \(err)")
