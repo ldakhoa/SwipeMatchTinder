@@ -11,7 +11,7 @@ import LBTATools
 
 class MatchesNavBar: UIView {
     
-    let backButton = UIButton(image: #imageLiteral(resourceName: "app_icon"), tintColor: .lightGray)
+    let backButton = UIButton(image: #imageLiteral(resourceName: "app_icon"), tintColor: #colorLiteral(red: 0.8370121121, green: 0.850846529, blue: 0.889801085, alpha: 1))
     
     override init(frame: CGRect) {
         super.init(frame: frame)

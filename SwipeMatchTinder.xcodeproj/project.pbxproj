@@ -31,6 +31,8 @@
 		0222823A22979B4A0079E44C /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0222823922979B4A0079E44C /* MessageCell.swift */; };
 		0222823C22979CEC0079E44C /* MessagesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0222823B22979CEC0079E44C /* MessagesNavBar.swift */; };
 		025205242299259500F76214 /* CustomInputAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025205232299259500F76214 /* CustomInputAccessView.swift */; };
+		02566E17229A5F1E005FE95B /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */; };
+		025C51BB229A525100491513 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C51BA229A525100491513 /* MatchesHeader.swift */; };
 		026B703722956A20009B49B2 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026B703622956A20009B49B2 /* MatchesMessagesController.swift */; };
 		026B703922964A88009B49B2 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026B703822964A88009B49B2 /* MatchesNavBar.swift */; };
 		027A9E6E229655780091A13A /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A9E6D229655780091A13A /* MatchCell.swift */; };
@@ -80,6 +82,8 @@
 		0222823922979B4A0079E44C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		0222823B22979CEC0079E44C /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
 		025205232299259500F76214 /* CustomInputAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessView.swift; sourceTree = "<group>"; };
+		02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
+		025C51BA229A525100491513 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
 		026B703622956A20009B49B2 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		026B703822964A88009B49B2 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
 		027A9E6D229655780091A13A /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
@@ -218,10 +222,20 @@
 			name = MatchesMessages;
 			sourceTree = "<group>";
 		};
+		02566E15229A5900005FE95B /* MatchesControllers */ = {
+			isa = PBXGroup;
+			children = (
+				025C51BA229A525100491513 /* MatchesHeader.swift */,
+				026B703622956A20009B49B2 /* MatchesMessagesController.swift */,
+				02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */,
+			);
+			path = MatchesControllers;
+			sourceTree = "<group>";
+		};
 		026B7035229569FF009B49B2 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				026B703622956A20009B49B2 /* MatchesMessagesController.swift */,
+				02566E15229A5900005FE95B /* MatchesControllers */,
 				0222823522979A950079E44C /* ChatLogController.swift */,
 			);
 			name = Messages;
@@ -444,6 +458,7 @@
 				029D49F021F786BF0021328D /* RegistrationViewController.swift in Sources */,
 				0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */,
 				0222823622979A950079E44C /* ChatLogController.swift in Sources */,
+				025C51BB229A525100491513 /* MatchesHeader.swift in Sources */,
 				0295EDCD22014B9A0095BE9C /* PhotoController.swift in Sources */,
 				0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */,
 				0214762C21FD645F0087780A /* SettingsTableViewController.swift in Sources */,
@@ -455,6 +470,7 @@
 				02E950692203F60B007B211C /* MatchView.swift in Sources */,
 				029D49F921FAB0030021328D /* Bindable.swift in Sources */,
 				0295EDED2201F1A60095BE9C /* BioCell.swift in Sources */,
+				02566E17229A5F1E005FE95B /* MatchesHorizontalController.swift in Sources */,
 				0222823822979B2E0079E44C /* Message.swift in Sources */,
 				029D49F221F78B3D0021328D /* CustomTextField.swift in Sources */,
 				02E9506F2204005E007B211C /* KeepSwipingButton.swift in Sources */,
