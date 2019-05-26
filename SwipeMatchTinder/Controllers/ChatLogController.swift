@@ -54,6 +54,7 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         fetchMessages()
+        fetchCurrentUser()
         
     }
     
@@ -86,6 +87,13 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
     }
     
     @objc fileprivate func handleSend() {
+        saveFromMessages()
+        saveFromRecentMessages()
+    }
+    
+    // TODO: - Refactor this, too!
+
+    fileprivate func saveFromMessages() {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         let collection = Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection(match.uid)
         let data: [String: Any] = ["text": customInputAccessView.textView.text ?? "", "fromId": currentUserId, "toId": match.uid, "timestamp": Timestamp(date: Date())]
@@ -107,6 +115,44 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
             }
             self.customInputAccessView.textView.text = nil
             self.customInputAccessView.placeHolderLabel.isHighlighted = false
+        }
+    }
+    
+    fileprivate func saveFromRecentMessages() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        
+        let query = Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection("recent_messages").document(match.uid)
+        let data: [String: Any] = ["text": customInputAccessView.textView.text ?? "", "name": match.name, "profileImageUrl": match.profileImageUrl, "timestamp": Timestamp(date: Date()), "uid": match.uid]
+        
+        query.setData(data) { (err) in
+            if let err = err {
+                print("Failed to save recent msg \(err)")
+                return
+            }
+            
+        }
+        
+        // save the other direction
+
+        guard let currentUser = self.currentUser else { return }
+        let toData: [String: Any] = ["text": customInputAccessView.textView.text ?? "", "name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "timestamp": Timestamp(date: Date()), "uid": currentUserId]
+        Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(match.uid).collection("recent_messages").document(currentUserId).setData(toData) { (err) in
+            if let err = err {
+                print("Failed to save recent msg \(err)")
+                return
+            }
+            
+        }
+        
+    }
+    
+    var currentUser: User?
+    
+    fileprivate func fetchCurrentUser() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserId).getDocument { (snapshot, err) in
+            let data: [String: Any] = snapshot?.data() ?? [:]
+            self.currentUser = User(dictionary: data)
         }
     }
     

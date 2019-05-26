@@ -32,6 +32,7 @@
 		0222823C22979CEC0079E44C /* MessagesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0222823B22979CEC0079E44C /* MessagesNavBar.swift */; };
 		025205242299259500F76214 /* CustomInputAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025205232299259500F76214 /* CustomInputAccessView.swift */; };
 		02566E17229A5F1E005FE95B /* MatchesHorizontalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */; };
+		02566E19229A82B5005FE95B /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02566E18229A82B5005FE95B /* RecentMessage.swift */; };
 		025C51BB229A525100491513 /* MatchesHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025C51BA229A525100491513 /* MatchesHeader.swift */; };
 		026B703722956A20009B49B2 /* MatchesMessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026B703622956A20009B49B2 /* MatchesMessagesController.swift */; };
 		026B703922964A88009B49B2 /* MatchesNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026B703822964A88009B49B2 /* MatchesNavBar.swift */; };
@@ -47,6 +48,7 @@
 		029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029D49F421F848F00021328D /* GoogleService-Info.plist */; };
 		029D49F721F84CE90021328D /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F621F84CE90021328D /* RegistrationViewModel.swift */; };
 		029D49F921FAB0030021328D /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D49F821FAB0030021328D /* Bindable.swift */; };
+		02D1DB18229B023200F8375A /* RecentMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D1DB17229B023200F8375A /* RecentMessageCell.swift */; };
 		02E06C4221FFFD91008B8D1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E06C4121FFFD91008B8D1E /* LoginViewController.swift */; };
 		02E06C4421FFFFE6008B8D1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */; };
 		02E950692203F60B007B211C /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E950682203F60B007B211C /* MatchView.swift */; };
@@ -83,6 +85,7 @@
 		0222823B22979CEC0079E44C /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
 		025205232299259500F76214 /* CustomInputAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessView.swift; sourceTree = "<group>"; };
 		02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
+		02566E18229A82B5005FE95B /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		025C51BA229A525100491513 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
 		026B703622956A20009B49B2 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
 		026B703822964A88009B49B2 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		029D49F421F848F00021328D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		029D49F621F84CE90021328D /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		029D49F821FAB0030021328D /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		02D1DB17229B023200F8375A /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
 		02E06C4121FFFD91008B8D1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		02E950682203F60B007B211C /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */,
 				027A9E6F2296569F0091A13A /* Match.swift */,
 				0222823722979B2E0079E44C /* Message.swift */,
+				02566E18229A82B5005FE95B /* RecentMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 			children = (
 				027A9E6D229655780091A13A /* MatchCell.swift */,
 				0222823922979B4A0079E44C /* MessageCell.swift */,
+				02D1DB17229B023200F8375A /* RecentMessageCell.swift */,
 			);
 			name = MessagesView;
 			sourceTree = "<group>";
@@ -459,7 +465,9 @@
 				0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */,
 				0222823622979A950079E44C /* ChatLogController.swift in Sources */,
 				025C51BB229A525100491513 /* MatchesHeader.swift in Sources */,
+				02D1DB18229B023200F8375A /* RecentMessageCell.swift in Sources */,
 				0295EDCD22014B9A0095BE9C /* PhotoController.swift in Sources */,
+				02566E19229A82B5005FE95B /* RecentMessage.swift in Sources */,
 				0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */,
 				0214762C21FD645F0087780A /* SettingsTableViewController.swift in Sources */,
 				026B703922964A88009B49B2 /* MatchesNavBar.swift in Sources */,

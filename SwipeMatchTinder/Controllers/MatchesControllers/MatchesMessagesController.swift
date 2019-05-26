@@ -9,45 +9,14 @@
 import LBTATools
 import Firebase
 
-class RecentMessageCell: LBTAListCell<UIColor> {
-    
-    let userProfileImageView = UIImageView(image: #imageLiteral(resourceName: "jane1.jpg"), contentMode: .scaleAspectFill)
-    let usernameLabel = UILabel(text: "USERNAME HERE", font: .boldSystemFont(ofSize: 18))
-    let messageTextLabel = UILabel(text: "some text long line of text that should span 2 lines", font: .systemFont(ofSize: 16), textColor: .gray, numberOfLines: 2)
-    
-    override var item: UIColor! {
-        didSet {
-//            backgroundColor = item
-        }
-    }
-    
-    override func setupViews() {
-        super.setupViews()
-        
-        let size: CGFloat = 94
-        userProfileImageView.layer.cornerRadius = size / 2
-        
-        hstack(userProfileImageView.withWidth(size).withHeight(size),
-               stack(usernameLabel, messageTextLabel, spacing: 2),
-               spacing: 20,
-               alignment: .center
-        ).padLeft(20).padRight(20)
-        
-        addSeparatorView(leadingAnchor: usernameLabel.leadingAnchor)
-        
-    }
-}
-
-class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, UIColor, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, RecentMessage, MatchesHeader>, UICollectionViewDelegateFlowLayout {
 
     let customNavBar = MatchesNavBar()
     
+    var recentMessagesDictionary = [String: RecentMessage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        items = [.red, .blue, .green, .purple]
-        
-        
         
         navigationController?.navigationBar.isHidden = true
 
@@ -55,7 +24,7 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, UIC
         
         setupCollectionView()
         setupLayout()
-
+        fetchRecentMessages()
         
     }
     
@@ -74,6 +43,35 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, UIC
         collectionView.scrollIndicatorInsets.top = 150
     }
     
+    fileprivate func fetchRecentMessages() {
+        guard let currentUserId = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnapshot, err) in
+            if let err = err {
+                print("Failed to fetch recent messages \(err)")
+                return
+            }
+            
+            querySnapshot?.documentChanges.forEach({ (change) in
+                if change.type == .added || change.type == .modified {
+                    let dictionary = change.document.data()
+                    let recentMessage = RecentMessage(dictionary: dictionary)
+                    self.recentMessagesDictionary[recentMessage.uid] = recentMessage
+                    
+                }
+            })
+            self.resetItems()
+        
+        }
+    }
+    
+    fileprivate func resetItems() {
+        let values = Array(recentMessagesDictionary.values)
+        items = values.sorted(by: { (rm1, rm2) -> Bool in
+            return rm1.timestamp.compare(rm2.timestamp) == .orderedDescending
+        })
+        collectionView.reloadData()
+    }
+    
     @objc fileprivate func handleBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -89,6 +87,16 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, UIC
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recentMessage = self.items[indexPath.item]
+        
+        let dictionary = ["name": recentMessage.name, "profileImageUrl": recentMessage.profileImageUrl, "uid": recentMessage.uid]
+        
+        let match = Match(dictionary: dictionary)
+        let controller = ChatLogController(match: match)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     // MARK: - CollectionView Header
