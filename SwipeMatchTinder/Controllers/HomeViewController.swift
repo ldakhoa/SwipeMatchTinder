@@ -13,15 +13,15 @@ import JGProgressHUD
 class HomeViewController: UIViewController {
     
     fileprivate var user: User?
-
+    
     let hud = JGProgressHUD(style: .dark)
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
-
+    
     var cardViewModels = [CardViewModel]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,15 +44,15 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         if Auth.auth().currentUser == nil {
             let registrationController = RegistrationViewController()
             registrationController.delegate = self
             let navController = UINavigationController(rootViewController: registrationController)
-
+            
             present(navController, animated: true, completion: nil)
         }
-
+        
     }
     
     // MARK: - Handle method
@@ -77,7 +77,7 @@ class HomeViewController: UIViewController {
     @objc func handeLike() {
         saveSwipeToFirestore(didLike: 1)
         performSwipeAnimation(translation: 700, angle: 15)
-
+        
     }
     
     @objc func handeDisLike() {
@@ -89,7 +89,7 @@ class HomeViewController: UIViewController {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let cardUID = topCardView?.cardViewModel.uid else { return }
-
+        
         let documentData = [cardUID: didLike]
         let swipesCollection = Firestore.firestore().collection("swipes").document(uid)
         swipesCollection.getDocument { (snapshot, err) in
@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
         matchView.fillSuperview()
         
         matchView.sendMessageButton.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
-
+        
     }
     
     fileprivate func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
@@ -204,18 +204,18 @@ class HomeViewController: UIViewController {
         let vc = MatchesMassagesController()
         navigationController?.pushViewController(vc, animated: true)        
     }
-
+    
     fileprivate var match: Match?
-
+    
     @objc func handleSendMessage() {
         // current uid
-
+        
         let dictionary = ["name": user?.name ?? "", "profileImageUrl": match?.profileImageUrl ?? "", "uid": match?.uid ?? ""]
         let match = Match(dictionary: dictionary)
         let chatLogController = ChatLogController(match: match)
         navigationController?.pushViewController(chatLogController, animated: true)
     }
-
+    
     // MARK: - Layout
     
     fileprivate func setupLayout() {
@@ -227,16 +227,16 @@ class HomeViewController: UIViewController {
         overallStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
-         
+        
         overallStackView.bringSubviewToFront(cardsDeckView)
-
+        
     }
     
     // MARK: - Fetch from Firestore
     var users = [String: User]()
     
     fileprivate func fetchUserFromFirestore() {
-
+        
         let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
         let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
         
@@ -262,8 +262,8 @@ class HomeViewController: UIViewController {
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
-//                if isNotCurrentUser && hasNotSwipedBefore {
-                if isNotCurrentUser {
+                // if isNotCurrentUser && hasNotSwipedBefore {
+                if isNotCurrentUser{
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
                     previousCardView = cardView
@@ -276,7 +276,7 @@ class HomeViewController: UIViewController {
             })
         }
     }
-
+    
     fileprivate func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.delegate = self
@@ -318,7 +318,7 @@ class HomeViewController: UIViewController {
             self.fetchUserFromFirestore()
         }
     }
-
+    
 }
 
 extension HomeViewController: SettingsControllerDelegate, LoginControllerDelegate {
@@ -338,6 +338,6 @@ extension HomeViewController: CardViewDelegate {
         userDetailsController.cardViewModel = cardViewModel
         present(userDetailsController, animated: true, completion: nil)
     }
-
+    
     
 }
