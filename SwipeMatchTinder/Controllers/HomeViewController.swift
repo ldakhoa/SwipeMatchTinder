@@ -13,6 +13,7 @@ import JGProgressHUD
 class HomeViewController: UIViewController {
     
     fileprivate var user: User?
+
     let hud = JGProgressHUD(style: .dark)
     
     let topStackView = TopNavigationStackView()
@@ -142,7 +143,7 @@ class HomeViewController: UIViewController {
                 })
                 
                 guard let currentUser = self.user else { return }
-                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": currentUser.uid, "timestamp": Timestamp(date: Date())]
+                let otherMatchData: [String: Any] = ["name": currentUser.name ?? "", "profileImageUrl": currentUser.imageUrl1 ?? "", "uid": currentUser.uid ?? "", "timestamp": Timestamp(date: Date())]
                 Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(uid).collection("matches").document(uid).setData(otherMatchData, completion: { (err) in
                     if let err = err {
                         print("Failed to save match info: \(err)")
@@ -153,12 +154,16 @@ class HomeViewController: UIViewController {
         }
     }
     
+    
     fileprivate func presentMatchView(cardUID: String) {
         let matchView = MatchView()
         matchView.cardUID = cardUID
         matchView.currentUser = self.user
         view.addSubview(matchView)
         matchView.fillSuperview()
+        
+        matchView.sendMessageButton.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
+
     }
     
     fileprivate func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
@@ -198,6 +203,17 @@ class HomeViewController: UIViewController {
     @objc fileprivate func handleMessages() {
         let vc = MatchesMassagesController()
         navigationController?.pushViewController(vc, animated: true)        
+    }
+
+    fileprivate var match: Match?
+
+    @objc func handleSendMessage() {
+        // current uid
+
+        let dictionary = ["name": user?.name ?? "", "profileImageUrl": match?.profileImageUrl ?? "", "uid": match?.uid ?? ""]
+        let match = Match(dictionary: dictionary)
+        let chatLogController = ChatLogController(match: match)
+        navigationController?.pushViewController(chatLogController, animated: true)
     }
 
     // MARK: - Layout
