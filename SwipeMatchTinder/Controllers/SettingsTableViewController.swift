@@ -17,6 +17,10 @@ protocol SettingsControllerDelegate {
 
 class SettingsTableViewController: UITableViewController {
     
+    deinit {
+        print("Object is destroing itself properly, no retain cycles of any other memory related issue. Memory being reclaimed properly")
+    }
+    
     var user: User?
     var delegate: SettingsControllerDelegate?
     

@@ -15,6 +15,8 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, Rec
     
     var recentMessagesDictionary = [String: RecentMessage]()
     
+    var listener: ListenerRegistration?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,7 +47,8 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, Rec
     
     fileprivate func fetchRecentMessages() {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection("recent_messages").addSnapshotListener { (querySnapshot, err) in
+        let query = Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection("recent_messages")
+        listener = query.addSnapshotListener { (querySnapshot, err) in
             if let err = err {
                 print("Failed to fetch recent messages \(err)")
                 return
@@ -62,6 +65,18 @@ class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, Rec
             self.resetItems()
         
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent {
+            listener?.remove()
+        }
+    }
+    
+    deinit {
+        print("Reclaiming memory from the matches")
     }
     
     fileprivate func resetItems() {

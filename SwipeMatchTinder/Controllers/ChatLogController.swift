@@ -11,6 +11,10 @@ import Firebase
 
 class ChatLogController: LBTAListController<MessageCell, Message> {
     
+    deinit {
+        print("Chatlog Object is destroing itself properly, no retain cycles of any other memory related issue. Memory being reclaimed properly")
+    }
+    
     fileprivate lazy var messagesNavBar = MessagesNavBar(match: match)
     
     fileprivate let navBarHeight: CGFloat = 120
@@ -156,10 +160,12 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
         }
     }
     
+    var listener: ListenerRegistration?
+    
     fileprivate func fetchMessages() {
         guard let currentUserId = Auth.auth().currentUser?.uid else { return }
         let query = Firestore.firestore().collection(ChatLogController.matchesMsgCollection).document(currentUserId).collection(match.uid).order(by: "timestamp")
-        query.addSnapshotListener { (querySnapshot, err) in
+        listener = query.addSnapshotListener { (querySnapshot, err) in
             if let err = err {
                 print("Failed to fetch msg: \(err)")
                 return
@@ -174,6 +180,17 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
             })
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
+        }
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // tells you if its being popped off the nav stack
+        if isMovingFromParent {
+            listener?.remove()
         }
     }
     

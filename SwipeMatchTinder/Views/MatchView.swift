@@ -77,7 +77,7 @@ class MatchView: UIView {
         return iv
     }()
     
-    fileprivate let sendMessageButton: UIButton = {
+    let sendMessageButton: UIButton = {
         let button = SendMessageButton(type: .system)
         button.setTitle("SEND MESSAGE", for: .normal)
         button.setTitleColor(.white, for: .normal)
