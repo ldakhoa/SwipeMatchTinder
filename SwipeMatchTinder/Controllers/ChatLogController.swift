@@ -200,6 +200,7 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
+
 extension ChatLogController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let estimatedSizeCell = MessageCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
