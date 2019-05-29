@@ -246,8 +246,7 @@ class HomeViewController: UIViewController {
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
                 let hasNotSwipedBefore = self.swipes[user.uid!] == nil
-//                if isNotCurrentUser && hasNotSwipedBefore {
-                if isNotCurrentUser {
+                if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
                     previousCardView = cardView
