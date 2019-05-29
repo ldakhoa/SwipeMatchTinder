@@ -11,7 +11,7 @@ import LBTATools
 
 class MatchesHorizontalController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
     
-    var rootMatchesController: MatchesMassagesController?
+    weak var rootMatchesController: MatchesMassagesController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
