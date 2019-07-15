@@ -46,15 +46,13 @@ class SettingsTableViewController: UITableViewController {
         return button
     }
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationItems()
         setupTableView()
         fetchCurrentUser()
-        tableView.dataSource = self
+        
 
     }
     
@@ -82,16 +80,14 @@ class SettingsTableViewController: UITableViewController {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
             "uid": uid,
-            "email": user?.email ?? "",
             "fullName": user?.name ?? "",
             "imageUrl1": user?.imageUrl1 ?? "",
             "imageUrl2": user?.imageUrl2 ?? "",
             "imageUrl3": user?.imageUrl3 ?? "",
             "age": user?.age ?? -1,
-            "bio": user?.bio ?? "",
             "profession": user?.profession ?? "",
             "minSeekingAge": user?.minSeekingAge ?? -1,
-            "maxSeekingAge": user?.maxSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
         ]
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving settings"
@@ -235,10 +231,11 @@ extension SettingsTableViewController {
             Void()
         }
         if indexPath.section == 4 {
-            let bioCell = BioCell(style: .default, reuseIdentifier: nil)
-            let bioTextView = bioCell.textView
-            bioTextView.text = user?.bio
-            return bioCell
+            cell.textField.placeholder = "Enter Bio"
+//            let bioCell = BioCell(style: .default, reuseIdentifier: nil)
+//            let bioTextView = bioCell.textView
+//            bioTextView.text = user?.bio
+//            return bioCell
         }
         // age range cell
         if indexPath.section == 5 {
@@ -281,9 +278,9 @@ extension SettingsTableViewController {
         self.user?.age = Int(textField.text ?? "")
     }
     
-    @objc fileprivate func handleBioChange(textField: UITextField) {
-        self.user?.bio = textField.text
-    }
+//    @objc fileprivate func handleBioChange(textField: UITextField) {
+//        self.user?.bio = textField.text
+//    }
     
     @objc fileprivate func handleAgeSeekingChange() {
         evaluateMinMax()

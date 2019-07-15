@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
         addButtonsAction()
         setupLayout()
         fetchCurrentUser()
-        
+        fetchUserFromFirestore()
     }
     
     fileprivate func addButtonsAction() {
@@ -261,7 +261,8 @@ class HomeViewController: UIViewController {
                 self.users[user.uid ?? ""] = user
                 let currentUser = Auth.auth().currentUser?.uid
                 let isNotCurrentUser = user.uid != currentUser
-                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+//                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                let hasNotSwipedBefore = true
                 if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView

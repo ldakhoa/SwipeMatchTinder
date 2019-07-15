@@ -11,7 +11,6 @@
 		0206859321FEA71600416D50 /* Firestore+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0206859221FEA71600416D50 /* Firestore+Utils.swift */; };
 		0214053F21F2D26C00D5DE5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214053E21F2D26C00D5DE5E /* AppDelegate.swift */; };
 		0214054121F2D26C00D5DE5E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214054021F2D26C00D5DE5E /* HomeViewController.swift */; };
-		0214054421F2D26C00D5DE5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0214054221F2D26C00D5DE5E /* Main.storyboard */; };
 		0214054621F2D26E00D5DE5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0214054521F2D26E00D5DE5E /* Assets.xcassets */; };
 		0214054921F2D26E00D5DE5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */; };
 		0214055C21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */; };
@@ -63,7 +62,6 @@
 		0214053B21F2D26C00D5DE5E /* SwipeMatchTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwipeMatchTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0214053E21F2D26C00D5DE5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0214054021F2D26C00D5DE5E /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		0214054321F2D26C00D5DE5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0214054521F2D26E00D5DE5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0214054821F2D26E00D5DE5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0214054A21F2D26E00D5DE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				0214055A21F2DAD300D5DE5E /* Views */,
 				0221FF5921F4E33500EAD109 /* Controllers */,
 				0221FF5A21F4E3C900EAD109 /* ViewModels */,
-				0214054221F2D26C00D5DE5E /* Main.storyboard */,
 				0214054521F2D26E00D5DE5E /* Assets.xcassets */,
 				0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */,
 				0214054A21F2D26E00D5DE5E /* Info.plist */,
@@ -382,7 +379,6 @@
 				0214054921F2D26E00D5DE5E /* LaunchScreen.storyboard in Resources */,
 				029D49F521F848F00021328D /* GoogleService-Info.plist in Resources */,
 				0214054621F2D26E00D5DE5E /* Assets.xcassets in Resources */,
-				0214054421F2D26C00D5DE5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,14 +497,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0214054221F2D26C00D5DE5E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0214054321F2D26C00D5DE5E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

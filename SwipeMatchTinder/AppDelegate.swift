@@ -25,9 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())
-//        window?.rootViewController = UINavigationController(rootViewController: MatchesMassagesController(collectionViewLayout: UICollectionViewFlowLayout()))
-        
+        window?.rootViewController = UINavigationController(rootViewController: HomeViewController())        
         
         return true
     }
