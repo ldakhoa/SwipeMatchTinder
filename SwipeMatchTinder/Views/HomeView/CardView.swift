@@ -162,9 +162,9 @@ class CardView: UIView {
             guard let homeController = self.delegate as? HomeViewController else {return }
             self.isUserInteractionEnabled = false
             if translationDirection == 1 {
-                homeController.handeLike()
+                homeController.handleLike()
             } else {
-                homeController.handeDisLike()
+                homeController.handleDislike()
             }
         } else {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {

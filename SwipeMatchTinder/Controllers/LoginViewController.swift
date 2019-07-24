@@ -10,7 +10,7 @@ import UIKit
 import JGProgressHUD
 
 protocol LoginControllerDelegate {
-    func didFinishLogingIn()
+    func didFinishLoggingIn()
 }
 
 class LoginViewController: UIViewController {
@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
             print("Login success")
 
             self.dismiss(animated: true, completion: {
-                self.delegate?.didFinishLogingIn()
+                self.delegate?.didFinishLoggingIn()
             })
             
         }

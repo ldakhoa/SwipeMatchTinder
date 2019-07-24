@@ -105,7 +105,7 @@ class RegistrationViewController: UIViewController {
             }
             
             self?.dismiss(animated: true, completion: {
-                self?.delegate?.didFinishLogingIn()
+                self?.delegate?.didFinishLoggingIn()
             })
         }
     }
