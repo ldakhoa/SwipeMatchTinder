@@ -55,9 +55,9 @@ class MatchView: UIView {
         label.numberOfLines = 0
         return label
     }()
-    
+     
     fileprivate let currentUserImageView: UIImageView = {
-        let iv = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
+        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 140 / 2
         iv.layer.borderWidth = 2
@@ -67,7 +67,7 @@ class MatchView: UIView {
     }()
 
     fileprivate let cardUserImageView: UIImageView = {
-        let iv = UIImageView(image: #imageLiteral(resourceName: "lady4c"))
+        let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 140 / 2
         iv.layer.borderWidth = 2
@@ -134,6 +134,7 @@ class MatchView: UIView {
         sendMessageButton,
         keepSwipingButton
     ]
+    
     fileprivate func setupLayout() {
         views.forEach { (v) in
             addSubview(v)
