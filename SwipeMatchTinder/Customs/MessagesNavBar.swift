@@ -10,7 +10,7 @@ import LBTATools
 
 class MessagesNavBar: UIView {
     
-    let userProfileImageView = CircularImageView(width: 44, image: #imageLiteral(resourceName: "lady4c"))
+    let userProfileImageView = CircularImageView(width: 44, image: nil)
     let nameLabel = UILabel(text: "USERNAME", font: .systemFont(ofSize: 16))
     let backButton = UIButton(image: #imageLiteral(resourceName: "back"), tintColor: #colorLiteral(red: 1, green: 0.3552635908, blue: 0.3608631492, alpha: 1))
     let flagButton = UIButton(image: #imageLiteral(resourceName: "flag"), tintColor: #colorLiteral(red: 1, green: 0.3552635908, blue: 0.3608631492, alpha: 1))
@@ -27,7 +27,6 @@ class MessagesNavBar: UIView {
         }
         
         setupLayout()
-
         
     }
     

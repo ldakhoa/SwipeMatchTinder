@@ -15,14 +15,20 @@ class HomeViewController: UIViewController {
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
-    
+    let matchView = MatchView()
     var cardViewModels = [CardViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.isHidden = true
-        
+    
+        addTargetButtons()
+        setupLayout()
+        fetchCurrentUser()
+    }
+    
+    fileprivate func addTargetButtons() {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         topStackView.messageButton.addTarget(self, action: #selector(handleMessages), for: .touchUpInside)
         
@@ -30,8 +36,16 @@ class HomeViewController: UIViewController {
         bottomControls.likeButton.addTarget(self, action: #selector(handleLike), for: .touchUpInside)
         bottomControls.dislikeButton.addTarget(self, action: #selector(handleDislike), for: .touchUpInside)
         
-        setupLayout()
-        fetchCurrentUser()
+        matchView.sendMessageButton.addTarget(self, action: #selector(handleSendMessages), for: .touchUpInside)
+    }
+    
+    @objc fileprivate func handleSendMessages() {
+//        let dictionary = ["name": , "profileImageUrl": , "uid": ]
+//        let chatLogController = ChatLogController(match: dictionary)
+//        present(chatLogController, animated: true, completion: nil)
+        // uid: vtyDJ7sLqhMzYhaZ806I7B5L3yA2
+//        matchView.cardUID.user
+//        let dictionary =
     }
     
     @objc fileprivate func handleMessages() {
@@ -227,7 +241,7 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func presentMatchView(cardUID: String) {
-        let matchView = MatchView()
+        
         matchView.cardUID = cardUID
         matchView.currentUser = self.user
         view.addSubview(matchView)
