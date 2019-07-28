@@ -18,6 +18,8 @@ class HomeViewController: UIViewController {
     let matchView = MatchView()
     var cardViewModels = [CardViewModel]()
     
+    // MARK: - View Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +29,20 @@ class HomeViewController: UIViewController {
         setupLayout()
         fetchCurrentUser()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // you want to kick the user out when they log out
+        if Auth.auth().currentUser == nil {
+            let registrationController = RegistrationViewController()
+            registrationController.delegate = self
+            let navController = UINavigationController(rootViewController: registrationController)
+            present(navController, animated: true)
+        }
+    }
+    
+    // MARK: - Handle Target Action
     
     fileprivate func addTargetButtons() {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
@@ -40,12 +56,29 @@ class HomeViewController: UIViewController {
     }
     
     @objc fileprivate func handleSendMessages() {
-//        let dictionary = ["name": , "profileImageUrl": , "uid": ]
-//        let chatLogController = ChatLogController(match: dictionary)
-//        present(chatLogController, animated: true, completion: nil)
-        // uid: vtyDJ7sLqhMzYhaZ806I7B5L3yA2
-//        matchView.cardUID.user
-//        let dictionary =
+        guard let cardUID = matchView.cardUID else { return }
+        let query = Firestore.firestore().collection("users")
+        query.document(cardUID).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Failed to fetch cardUID in handleSendMessage \(err)")
+                return
+            }
+            guard let userDictionary = snapshot?.data() else { return }
+            let matchedUser = User(dictionary: userDictionary)
+            guard let name = matchedUser.name,
+                let profileImageUrl = matchedUser.imageUrl1,
+                let uid = matchedUser.uid else {
+                    return
+            }
+            let matchDictionary: [String: Any] = ["name": name, "profileImageUrl": profileImageUrl, "uid": uid]
+            let match = Match(dictionary: matchDictionary)
+            let chatLogController = ChatLogController(match: match)
+
+            self.navigationController?.pushViewController(chatLogController, animated: true)
+
+        }
+        matchView.removeFromSuperview()
+        
     }
     
     @objc fileprivate func handleMessages() {
@@ -53,17 +86,29 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("HomeController did appear")
-        // you want to kick the user out when they log out
-        if Auth.auth().currentUser == nil {
-            let registrationController = RegistrationViewController()
-            registrationController.delegate = self
-            let navController = UINavigationController(rootViewController: registrationController)
-            present(navController, animated: true)
-        }
+    @objc func handleSettings() {
+        let settingsController = SettingsTableViewController()
+        settingsController.delegate = self
+        let navController = UINavigationController(rootViewController: settingsController)
+        present(navController, animated: true)
     }
+    
+    @objc fileprivate func handleRefresh() {
+        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
+        fetchUsersFromFirestore()
+    }
+    
+    @objc func handleLike() {
+        saveSwipeToFirestore(didLike: 1)
+        performSwipeAnimation(translation: 700, angle: 15)
+    }
+    
+    @objc func handleDislike() {
+        saveSwipeToFirestore(didLike: 0)
+        performSwipeAnimation(translation: -700, angle: -15)
+    }
+    
+    // MARK: - Call API from backend
     
     fileprivate let hud = JGProgressHUD(style: .dark)
     fileprivate var user: User?
@@ -99,11 +144,7 @@ class HomeViewController: UIViewController {
             self.fetchUsersFromFirestore()
         }
     }
-    
-    @objc fileprivate func handleRefresh() {
-        cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
-        fetchUsersFromFirestore()
-    }
+
     
     var lastFetchedUser: User?
     
@@ -151,12 +192,7 @@ class HomeViewController: UIViewController {
     var users = [String: User]()
     
     var topCardView: CardView?
-    
-    @objc func handleLike() {
-        saveSwipeToFirestore(didLike: 1)
-        performSwipeAnimation(translation: 700, angle: 15)
-    }
-    
+
     fileprivate func saveSwipeToFirestore(didLike: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -240,19 +276,16 @@ class HomeViewController: UIViewController {
         }
     }
     
+    // MARK: - Present UI
+    
     fileprivate func presentMatchView(cardUID: String) {
-        
         matchView.cardUID = cardUID
         matchView.currentUser = self.user
         view.addSubview(matchView)
         matchView.fillSuperview()
+        
     }
-    
-    @objc func handleDislike() {
-        saveSwipeToFirestore(didLike: 0)
-        performSwipeAnimation(translation: -700, angle: -15)
-    }
-    
+
     fileprivate func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.5
         let translationAnimation = CABasicAnimation(keyPath: "position.x")
@@ -289,13 +322,6 @@ class HomeViewController: UIViewController {
         return cardView
     }
 
-    
-    @objc func handleSettings() {
-        let settingsController = SettingsTableViewController()
-        settingsController.delegate = self
-        let navController = UINavigationController(rootViewController: settingsController)
-        present(navController, animated: true)
-    }
     
     fileprivate func setupLayout() {
         view.backgroundColor = .white

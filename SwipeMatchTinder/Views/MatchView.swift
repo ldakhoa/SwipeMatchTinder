@@ -21,7 +21,7 @@ class MatchView: UIView {
             let query = Firestore.firestore().collection("users")
             query.document(cardUID).getDocument { (snapshot, err) in
                 if let err = err {
-                    print("Failed to fect cardUID \(err)")
+                    print("Failed to fetch cardUID \(err)")
                     return
                 }
                 
