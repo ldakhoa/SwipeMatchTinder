@@ -77,17 +77,17 @@
 		0221FF5721F4DD4300EAD109 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		0221FF5D21F4EA4B00EAD109 /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
-		0222823522979A950079E44C /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		0222823522979A950079E44C /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatLogController.swift; path = Controllers/ChatLogController.swift; sourceTree = "<group>"; };
 		0222823722979B2E0079E44C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		0222823922979B4A0079E44C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
-		0222823B22979CEC0079E44C /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesNavBar.swift; sourceTree = "<group>"; };
-		025205232299259500F76214 /* CustomInputAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessView.swift; sourceTree = "<group>"; };
+		0222823922979B4A0079E44C /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = Views/MessageCell.swift; sourceTree = "<group>"; };
+		0222823B22979CEC0079E44C /* MessagesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesNavBar.swift; path = Customs/MessagesNavBar.swift; sourceTree = "<group>"; };
+		025205232299259500F76214 /* CustomInputAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomInputAccessView.swift; path = Customs/CustomInputAccessView.swift; sourceTree = "<group>"; };
 		02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalController.swift; sourceTree = "<group>"; };
 		02566E18229A82B5005FE95B /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		025C51BA229A525100491513 /* MatchesHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHeader.swift; sourceTree = "<group>"; };
 		026B703622956A20009B49B2 /* MatchesMessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesController.swift; sourceTree = "<group>"; };
-		026B703822964A88009B49B2 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesNavBar.swift; sourceTree = "<group>"; };
-		027A9E6D229655780091A13A /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
+		026B703822964A88009B49B2 /* MatchesNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchesNavBar.swift; path = Customs/MatchesNavBar.swift; sourceTree = "<group>"; };
+		027A9E6D229655780091A13A /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MatchCell.swift; path = Views/MatchCell.swift; sourceTree = "<group>"; };
 		027A9E6F2296569F0091A13A /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		0295EDC522006BEF0095BE9C /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosController.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		029D49F421F848F00021328D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		029D49F621F84CE90021328D /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		029D49F821FAB0030021328D /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
-		02D1DB17229B023200F8375A /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessageCell.swift; sourceTree = "<group>"; };
+		02D1DB17229B023200F8375A /* RecentMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecentMessageCell.swift; path = Views/RecentMessageCell.swift; sourceTree = "<group>"; };
 		02E06C4121FFFD91008B8D1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		02E950682203F60B007B211C /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
@@ -143,13 +143,15 @@
 		0214053D21F2D26C00D5DE5E /* SwipeMatchTinder */ = {
 			isa = PBXGroup;
 			children = (
-				0214053E21F2D26C00D5DE5E /* AppDelegate.swift */,
-				029D49F321F821130021328D /* Customs */,
-				0214055521F2D6B800D5DE5E /* Extensions */,
+				645F0D0523201E6E0001AC30 /* Systems */,
 				0221FF5621F4DD2D00EAD109 /* Model */,
-				0214055A21F2DAD300D5DE5E /* Views */,
-				0221FF5921F4E33500EAD109 /* Controllers */,
-				0221FF5A21F4E3C900EAD109 /* ViewModels */,
+				645F0D0423201E6C0001AC30 /* Login */,
+				645F0D0323201E6A0001AC30 /* Views */,
+				645F0D0223201E680001AC30 /* Settings */,
+				645F0D0123201E660001AC30 /* Messages */,
+				645F0D0023201E470001AC30 /* Home */,
+				0214055521F2D6B800D5DE5E /* Utility */,
+				0295EDC92200D0510095BE9C /* User Details */,
 				0214054521F2D26E00D5DE5E /* Assets.xcassets */,
 				0214054721F2D26E00D5DE5E /* LaunchScreen.storyboard */,
 				0214054A21F2D26E00D5DE5E /* Info.plist */,
@@ -158,23 +160,13 @@
 			path = SwipeMatchTinder;
 			sourceTree = "<group>";
 		};
-		0214055521F2D6B800D5DE5E /* Extensions */ = {
+		0214055521F2D6B800D5DE5E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				0206859221FEA71600416D50 /* Firestore+Utils.swift */,
+				029D49F821FAB0030021328D /* Bindable.swift */,
 			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0214055A21F2DAD300D5DE5E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				027A9E6B229655600091A13A /* MessagesView */,
-				02E9506A2203F610007B211C /* SettingsView */,
-				02E9506B2203F636007B211C /* HomeView */,
-				02E950682203F60B007B211C /* MatchView.swift */,
-			);
-			path = Views;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		0221FF5621F4DD2D00EAD109 /* Model */ = {
@@ -189,113 +181,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0221FF5921F4E33500EAD109 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				029D49EF21F786BF0021328D /* RegistrationViewController.swift */,
-				02E06C4121FFFD91008B8D1E /* LoginViewController.swift */,
-				0214054021F2D26C00D5DE5E /* HomeViewController.swift */,
-				0214762B21FD645F0087780A /* SettingsTableViewController.swift */,
-				0295EDCC22014B9A0095BE9C /* PhotoController.swift */,
-				026B7035229569FF009B49B2 /* Messages */,
-				0295EDC92200D0510095BE9C /* User Details */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		0221FF5A21F4E3C900EAD109 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				029D49F821FAB0030021328D /* Bindable.swift */,
-				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
-				02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */,
-				0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		025205222298F82900F76214 /* MatchesMessages */ = {
-			isa = PBXGroup;
-			children = (
-				026B703822964A88009B49B2 /* MatchesNavBar.swift */,
-				0222823B22979CEC0079E44C /* MessagesNavBar.swift */,
-				025205232299259500F76214 /* CustomInputAccessView.swift */,
-			);
-			name = MatchesMessages;
-			sourceTree = "<group>";
-		};
-		02566E15229A5900005FE95B /* MatchesControllers */ = {
-			isa = PBXGroup;
-			children = (
-				025C51BA229A525100491513 /* MatchesHeader.swift */,
-				026B703622956A20009B49B2 /* MatchesMessagesController.swift */,
-				02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */,
-			);
-			path = MatchesControllers;
-			sourceTree = "<group>";
-		};
-		026B7035229569FF009B49B2 /* Messages */ = {
-			isa = PBXGroup;
-			children = (
-				02566E15229A5900005FE95B /* MatchesControllers */,
-				0222823522979A950079E44C /* ChatLogController.swift */,
-			);
-			name = Messages;
-			sourceTree = "<group>";
-		};
-		027A9E6B229655600091A13A /* MessagesView */ = {
-			isa = PBXGroup;
-			children = (
-				027A9E6D229655780091A13A /* MatchCell.swift */,
-				0222823922979B4A0079E44C /* MessageCell.swift */,
-				02D1DB17229B023200F8375A /* RecentMessageCell.swift */,
-			);
-			name = MessagesView;
-			sourceTree = "<group>";
-		};
 		0295EDC92200D0510095BE9C /* User Details */ = {
 			isa = PBXGroup;
 			children = (
 				0295EDC522006BEF0095BE9C /* UserDetailsViewController.swift */,
 				0295EDCA2200D0780095BE9C /* SwipingPhotosController.swift */,
+				0295EDCC22014B9A0095BE9C /* PhotoController.swift */,
 			);
 			path = "User Details";
-			sourceTree = "<group>";
-		};
-		029D49F321F821130021328D /* Customs */ = {
-			isa = PBXGroup;
-			children = (
-				025205222298F82900F76214 /* MatchesMessages */,
-				029D49F121F78B3D0021328D /* CustomTextField.swift */,
-				0214762D21FD85860087780A /* CustomImagePickerController.swift */,
-				0214763121FD8E170087780A /* SettingsTextField.swift */,
-				0214763321FD8E410087780A /* HeaderLabel.swift */,
-				0206859021FE95B400416D50 /* AgeRangeLabel.swift */,
-				02E9506C2203FD5D007B211C /* SendMessageButton.swift */,
-				02E9506E2204005E007B211C /* KeepSwipingButton.swift */,
-			);
-			path = Customs;
-			sourceTree = "<group>";
-		};
-		02E9506A2203F610007B211C /* SettingsView */ = {
-			isa = PBXGroup;
-			children = (
-				0214762F21FD89480087780A /* SettingsCell.swift */,
-				0214763521FDFA730087780A /* AgeRangeCell.swift */,
-				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
-				0295EDEE220218410095BE9C /* LogoutCell.swift */,
-			);
-			path = SettingsView;
-			sourceTree = "<group>";
-		};
-		02E9506B2203F636007B211C /* HomeView */ = {
-			isa = PBXGroup;
-			children = (
-				0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */,
-				0214055F21F2F34300D5DE5E /* CardView.swift */,
-				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
-			);
-			path = HomeView;
 			sourceTree = "<group>";
 		};
 		414EEDBC3FC111606BF20693 /* Frameworks */ = {
@@ -304,6 +197,97 @@
 				55EB9608809498936AD916AC /* Pods_SwipeMatchTinder.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		645F0D0023201E470001AC30 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				645F0D06232021240001AC30 /* Card */,
+				0214055D21F2E09200D5DE5E /* TopNavigationStackView.swift */,
+				02E950682203F60B007B211C /* MatchView.swift */,
+				0214055B21F2DAFC00D5DE5E /* HomeBottomControlsStackView.swift */,
+				0214054021F2D26C00D5DE5E /* HomeViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		645F0D0123201E660001AC30 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				645F0D072320215A0001AC30 /* Views */,
+				027A9E6D229655780091A13A /* MatchCell.swift */,
+				0222823922979B4A0079E44C /* MessageCell.swift */,
+				02D1DB17229B023200F8375A /* RecentMessageCell.swift */,
+				0222823522979A950079E44C /* ChatLogController.swift */,
+				025C51BA229A525100491513 /* MatchesHeader.swift */,
+				026B703622956A20009B49B2 /* MatchesMessagesController.swift */,
+				02566E16229A5F1E005FE95B /* MatchesHorizontalController.swift */,
+			);
+			name = Messages;
+			sourceTree = "<group>";
+		};
+		645F0D0223201E680001AC30 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0214762F21FD89480087780A /* SettingsCell.swift */,
+				0214763521FDFA730087780A /* AgeRangeCell.swift */,
+				0295EDEC2201F1A60095BE9C /* BioCell.swift */,
+				0295EDEE220218410095BE9C /* LogoutCell.swift */,
+				0214762B21FD645F0087780A /* SettingsTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		645F0D0323201E6A0001AC30 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				029D49F121F78B3D0021328D /* CustomTextField.swift */,
+				0214762D21FD85860087780A /* CustomImagePickerController.swift */,
+				0214763121FD8E170087780A /* SettingsTextField.swift */,
+				0214763321FD8E410087780A /* HeaderLabel.swift */,
+				0206859021FE95B400416D50 /* AgeRangeLabel.swift */,
+				02E9506C2203FD5D007B211C /* SendMessageButton.swift */,
+				02E9506E2204005E007B211C /* KeepSwipingButton.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		645F0D0423201E6C0001AC30 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				029D49F621F84CE90021328D /* RegistrationViewModel.swift */,
+				029D49EF21F786BF0021328D /* RegistrationViewController.swift */,
+				02E06C4121FFFD91008B8D1E /* LoginViewController.swift */,
+				02E06C4321FFFFE6008B8D1E /* LoginViewModel.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		645F0D0523201E6E0001AC30 /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				0214053E21F2D26C00D5DE5E /* AppDelegate.swift */,
+			);
+			name = Systems;
+			sourceTree = "<group>";
+		};
+		645F0D06232021240001AC30 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				0214055F21F2F34300D5DE5E /* CardView.swift */,
+				0221FF5B21F4E3DD00EAD109 /* CardViewModel.swift */,
+			);
+			name = Card;
+			sourceTree = "<group>";
+		};
+		645F0D072320215A0001AC30 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				026B703822964A88009B49B2 /* MatchesNavBar.swift */,
+				0222823B22979CEC0079E44C /* MessagesNavBar.swift */,
+				025205232299259500F76214 /* CustomInputAccessView.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		77C1765DE93CB35281648F00 /* Pods */ = {

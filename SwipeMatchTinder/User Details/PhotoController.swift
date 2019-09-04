@@ -7,6 +7,7 @@
 //
 
 // This controller is used for CardView and SwipingPageController
+
 import UIKit
 
 class PhotoController: UIViewController {
