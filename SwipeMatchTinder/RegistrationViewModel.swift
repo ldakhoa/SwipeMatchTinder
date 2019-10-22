@@ -14,8 +14,7 @@ class RegistrationViewModel {
     var bindableIsRegistering = Bindable<Bool>()
     var bindableIsFormValid = Bindable<Bool>()
     var bindableImage = Bindable<UIImage>()
-    
-    
+        
     var fullname: String? { didSet { checkFormValidity() } }
     var email: String? { didSet { checkFormValidity() } }
     var password: String? { didSet { checkFormValidity() } }
