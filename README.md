@@ -12,9 +12,9 @@ My side project
 
 ## Recording
 <p align="center">
-<img src="Screenshots/123.gif" width="250">
+<img src="screenshots/1.gif" width="250">
 
-<img src="Screenshots/345.gif" width="500">
+<img src="screenshots/2.gif" width="500">
 </p>
 
 ## Features
