@@ -27,7 +27,7 @@ class SettingsTableViewController: UITableViewController {
     lazy var image1Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image2Button = createButton(selector: #selector(handleSelectPhoto))
     lazy var image3Button = createButton(selector: #selector(handleSelectPhoto))
-
+    
     @objc func handleSelectPhoto(button: UIButton) {
         let imagePicker = CustomImagePickerController()
         imagePicker.imageButton = button
@@ -53,7 +53,6 @@ class SettingsTableViewController: UITableViewController {
         setupTableView()
         fetchCurrentUser()
         
-
     }
     
     fileprivate func setupTableView() {
@@ -151,17 +150,136 @@ class SettingsTableViewController: UITableViewController {
         header.addSubview(image1Button)
         image1Button.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: padding, right: 0))
         image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
-
+        
         header.addSubview(stackView)
         stackView.anchor(top: header.topAnchor, leading: image1Button.trailingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
         return header
     }()
-
+    
 }
 
-// MARK: - TableViewController Datasource
-extension SettingsTableViewController {
+// MARK: - UITableViewController Datasource
 
+extension SettingsTableViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 7
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 0 : 1
+    }
+    
+    static let defaultMinSeekingAge = 18
+    static let defaultMaxSeekingAge = 50
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = SettingsCell(style: .default, reuseIdentifier: nil)
+        switch indexPath.section {
+        case 1:
+            cell.textField.placeholder = "Enter Name"
+            cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
+        case 2:
+            cell.textField.placeholder = "Enter Profession"
+            cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
+        case 3:
+            cell.textField.placeholder = "Enter Age"
+            cell.textField.keyboardType = .numberPad
+            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
+            if let age = user?.age {
+                cell.textField.text = String(age)
+            }
+        default:
+            Void()
+        }
+        if indexPath.section == 4 {
+            cell.textField.placeholder = "Enter Bio"
+            //            let bioCell = BioCell(style: .default, reuseIdentifier: nil)
+            //            let bioTextView = bioCell.textView
+            //            bioTextView.text = user?.bio
+            //            return bioCell
+        }
+        // age range cell
+        if indexPath.section == 5 {
+            let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
+            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
+            ageRangeCell.maxSlider.addTarget(self, action: #selector(handleAgeSeekingChange), for: .valueChanged)
+            // we need tp set up the labels on our cell here
+            let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
+            let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
+            ageRangeCell.minLabel.text = "Min \(minAge)"
+            ageRangeCell.maxLabel.text = "Max \(maxAge)"
+            ageRangeCell.minSlider.value = Float(minAge)
+            ageRangeCell.maxSlider.value = Float(maxAge)
+            return ageRangeCell
+        }
+        if indexPath.section == 6 {
+            let logoutCell = LogoutCell(style: .default, reuseIdentifier: nil)
+            logoutCell.logoutButton.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+            return logoutCell
+        }
+        return cell
+    }
+    
+    // MARK: - Handle Change
+    
+    @objc fileprivate func handleNameChange(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func handleProfessionChange(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func handleAgeChange(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
+    }
+    
+    //    @objc fileprivate func handleBioChange(textField: UITextField) {
+    //        self.user?.bio = textField.text
+    //    }
+    
+    @objc fileprivate func handleAgeSeekingChange() {
+        evaluateMinMax()
+    }
+    
+    @objc fileprivate func handleMinAgeChange() {
+        evaluateMinMax()
+    }
+    
+    fileprivate func evaluateMinMax() {
+        guard let ageRangeCell = tableView.cellForRow(at: [5, 0]) as? AgeRangeCell else { return }
+        let minValue = Int(ageRangeCell.minSlider.value)
+        var maxValue = Int(ageRangeCell.maxSlider.value)
+        maxValue = max(minValue, maxValue)
+        ageRangeCell.maxSlider.value = Float(maxValue)
+        ageRangeCell.minLabel.text = "Min \(minValue)"
+        ageRangeCell.maxLabel.text = "Max \(maxValue)"
+        user?.minSeekingAge = minValue
+        user?.maxSeekingAge = maxValue
+    }
+    
+    @objc fileprivate func handleLogout() {
+        let alertController = UIAlertController(title: "Log out of \(user?.name ?? "")?", message: "", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (_) in
+            try? Auth.auth().signOut()
+            self.dismiss(animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertController.view.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
+        self.present(alertController, animated: true)
+        
+    }
+    
+}
+
+// MARK: - UITableViewController Delegate
+
+extension SettingsTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         if section == 0 {
@@ -197,128 +315,15 @@ extension SettingsTableViewController {
         return 40
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : 1
-    }
-    
-    static let defaultMinSeekingAge = 18
-    static let defaultMaxSeekingAge = 50
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = SettingsCell(style: .default, reuseIdentifier: nil)
-        switch indexPath.section {
-        case 1:
-            cell.textField.placeholder = "Enter Name"
-            cell.textField.text = user?.name
-            cell.textField.addTarget(self, action: #selector(handleNameChange), for: .editingChanged)
-        case 2:
-            cell.textField.placeholder = "Enter Profession"
-            cell.textField.text = user?.profession
-            cell.textField.addTarget(self, action: #selector(handleProfessionChange), for: .editingChanged)
-        case 3:
-            cell.textField.placeholder = "Enter Age"
-            cell.textField.keyboardType = .numberPad
-            cell.textField.addTarget(self, action: #selector(handleAgeChange), for: .editingChanged)
-            if let age = user?.age {
-                cell.textField.text = String(age)
-            }
-        default:
-            Void()
-        }
-        if indexPath.section == 4 {
-            cell.textField.placeholder = "Enter Bio"
-//            let bioCell = BioCell(style: .default, reuseIdentifier: nil)
-//            let bioTextView = bioCell.textView
-//            bioTextView.text = user?.bio
-//            return bioCell
-        }
-        // age range cell
-        if indexPath.section == 5 {
-            let ageRangeCell = AgeRangeCell(style: .default, reuseIdentifier: nil)
-            ageRangeCell.minSlider.addTarget(self, action: #selector(handleMinAgeChange), for: .valueChanged)
-            ageRangeCell.maxSlider.addTarget(self, action: #selector(handleAgeSeekingChange), for: .valueChanged)
-            // we need tp set up the labels on our cell here
-            let minAge = user?.minSeekingAge ?? SettingsTableViewController.defaultMinSeekingAge
-            let maxAge = user?.maxSeekingAge ?? SettingsTableViewController.defaultMaxSeekingAge
-            ageRangeCell.minLabel.text = "Min \(minAge)"
-            ageRangeCell.maxLabel.text = "Max \(maxAge)"
-            ageRangeCell.minSlider.value = Float(minAge)
-            ageRangeCell.maxSlider.value = Float(maxAge)
-            return ageRangeCell
-        }
-        if indexPath.section == 6 {
-            let logoutCell = LogoutCell(style: .default, reuseIdentifier: nil)
-            logoutCell.logoutButton.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
-            return logoutCell
-        }
-        return cell
-    }
-    
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-    
-    // MARK: - Handle Change
-    
-    @objc fileprivate func handleNameChange(textField: UITextField) {
-        self.user?.name = textField.text
-    }
-    
-    @objc fileprivate func handleProfessionChange(textField: UITextField) {
-        self.user?.profession = textField.text
-    }
-    
-    @objc fileprivate func handleAgeChange(textField: UITextField) {
-        self.user?.age = Int(textField.text ?? "")
-    }
-    
-//    @objc fileprivate func handleBioChange(textField: UITextField) {
-//        self.user?.bio = textField.text
-//    }
-    
-    @objc fileprivate func handleAgeSeekingChange() {
-        evaluateMinMax()
-    }
-    
-    @objc fileprivate func handleMinAgeChange() {
-        evaluateMinMax()
-    }
-
-    fileprivate func evaluateMinMax() {
-        guard let ageRangeCell = tableView.cellForRow(at: [5, 0]) as? AgeRangeCell else { return }
-        let minValue = Int(ageRangeCell.minSlider.value)
-        var maxValue = Int(ageRangeCell.maxSlider.value)
-        maxValue = max(minValue, maxValue)
-        ageRangeCell.maxSlider.value = Float(maxValue)
-        ageRangeCell.minLabel.text = "Min \(minValue)"
-        ageRangeCell.maxLabel.text = "Max \(maxValue)"
-        user?.minSeekingAge = minValue
-        user?.maxSeekingAge = maxValue
-    }
-    
-    @objc fileprivate func handleLogout() {
-        let alertController = UIAlertController(title: "Log out of \(user?.name ?? "")?", message: "", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { (_) in
-            try? Auth.auth().signOut()
-            self.dismiss(animated: true, completion: nil)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertController.view.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
-        self.present(alertController, animated: true)
-
-        
-    }
-    
 }
 
+
 // MARK: - UIImagePickerControllerDelegate
+
 extension SettingsTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

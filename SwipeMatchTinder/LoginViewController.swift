@@ -71,16 +71,7 @@ class LoginViewController: UIViewController {
             
         }
     }
-    
-    fileprivate func showHUDWithError(error: Error) {
-        loginHUD.dismiss()
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Failed login"
-        hud.detailTextLabel.text = error.localizedDescription
-        hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3)
-    }
-    
+
     fileprivate let backToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Go to Register", for: .normal)
@@ -123,6 +114,16 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    fileprivate func showHUDWithError(error: Error) {
+        loginHUD.dismiss()
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed login"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 3)
+    }
+    
     
     // MARK: - Layout
     

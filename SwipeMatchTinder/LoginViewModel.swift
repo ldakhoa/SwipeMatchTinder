@@ -14,10 +14,10 @@ class LoginViewModel {
     var isLoggingIn = Bindable<Bool>()
     var isFormValid = Bindable<Bool>()
     
-    var email: String? { didSet { checkFormVadility() } }
-    var password: String? { didSet { checkFormVadility() } }
+    var email: String? { didSet { checkFormValidity() } }
+    var password: String? { didSet { checkFormValidity() } }
     
-    fileprivate func checkFormVadility() {
+    fileprivate func checkFormValidity() {
         let isValid = email?.isEmpty == false && password?.isEmpty == false
         isFormValid.value = isValid
     }
