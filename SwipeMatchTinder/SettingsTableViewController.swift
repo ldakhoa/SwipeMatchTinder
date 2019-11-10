@@ -53,7 +53,6 @@ class SettingsTableViewController: UITableViewController {
         setupTableView()
         fetchCurrentUser()
         
-        
     }
     
     fileprivate func setupTableView() {

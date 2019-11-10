@@ -16,6 +16,8 @@ class CustomInputAccessView: UIView {
     
     let placeHolderLabel = UILabel(text: "Enter Message", font: .systemFont(ofSize: 16), textColor: .lightGray)
     
+//    let messageImageView = UIImageView(image: , contentMode: .scaleAspectFill)
+    
     override var intrinsicContentSize: CGSize {
         return .zero
     }
@@ -33,7 +35,8 @@ class CustomInputAccessView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextChange), name: UITextView.textDidChangeNotification, object: nil)
 
-        hstack(textView,
+        hstack(messageImageView,
+               textView,
                sendButton.withSize(.init(width: 60, height: 60)),
                alignment: .center)
             .withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
