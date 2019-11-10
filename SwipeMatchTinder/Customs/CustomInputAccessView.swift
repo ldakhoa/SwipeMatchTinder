@@ -35,7 +35,7 @@ class CustomInputAccessView: UIView {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleTextChange), name: UITextView.textDidChangeNotification, object: nil)
 
-        hstack(messageImageView,
+        hstack(
                textView,
                sendButton.withSize(.init(width: 60, height: 60)),
                alignment: .center)
