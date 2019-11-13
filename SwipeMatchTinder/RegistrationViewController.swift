@@ -173,7 +173,10 @@ class RegistrationViewController: UIViewController {
         return sv
     }()
     
-    lazy var overallStackView = UIStackView(arrangedSubviews: [selectPhotoButton, verticalStackView])
+    lazy var overallStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [selectPhotoButton, verticalStackView])
+        return sv
+    }()
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if self.traitCollection.verticalSizeClass == .compact {
@@ -191,13 +194,15 @@ class RegistrationViewController: UIViewController {
     
     fileprivate func setupLayout() {
         navigationController?.isNavigationBarHidden = true
-        
+
         overallStackView.axis = .vertical
         overallStackView.spacing = 10
         
         view.addSubview(overallStackView)
+        
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 40, bottom: 0, right: 40))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        selectPhotoButtonHeightAnchor.isActive = true
         view.addSubview(goToLoginButton)
         goToLoginButton.anchor(top: nil, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.trailingAnchor)
         

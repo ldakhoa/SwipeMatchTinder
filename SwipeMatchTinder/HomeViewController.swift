@@ -34,10 +34,15 @@ class HomeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         // you want to kick the user out when they log out
+        
         if Auth.auth().currentUser == nil {
             let registrationController = RegistrationViewController()
             registrationController.delegate = self
             let navController = UINavigationController(rootViewController: registrationController)
+            if #available(iOS 13, *) {
+                navController.modalPresentationStyle = .fullScreen
+            }
+            
             present(navController, animated: true)
         }
     }
@@ -114,8 +119,8 @@ class HomeViewController: UIViewController {
     fileprivate var user: User?
     
     fileprivate func fetchCurrentUser() {
-        hud.textLabel.text = "Loading"
-        hud.show(in: view)
+//        hud.textLabel.text = "Loading"
+//        hud.show(in: view)
         cardsDeckView.subviews.forEach({$0.removeFromSuperview()})
         Firestore.firestore().fetchCurrentUser { (user, err) in
             if let err = err {
