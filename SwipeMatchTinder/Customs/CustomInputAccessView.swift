@@ -8,7 +8,7 @@
 
 import LBTATools
 
-class CustomInputAccessView: UIView {
+final class CustomInputAccessView: UIView {
     
     let textView = UITextView()
     
@@ -16,7 +16,7 @@ class CustomInputAccessView: UIView {
     
     let placeHolderLabel = UILabel(text: "Enter Message", font: .systemFont(ofSize: 16), textColor: .lightGray)
     
-//    let messageImageView = UIImageView(image: , contentMode: .scaleAspectFill)
+    //    let messageImageView = UIImageView(image: , contentMode: .scaleAspectFill)
     
     override var intrinsicContentSize: CGSize {
         return .zero
@@ -29,21 +29,32 @@ class CustomInputAccessView: UIView {
         autoresizingMask = .flexibleHeight
         
         setupShadow(opacity: 0.1, radius: 8, offset: .init(width: 0, height: -8), color: .lightGray)
-
+        
         textView.font = .systemFont(ofSize: 16)
         textView.isScrollEnabled = false
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleTextChange), name: UITextView.textDidChangeNotification, object: nil)
-
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleTextChange),
+            name: UITextView.textDidChangeNotification,
+            object: nil
+        )
+        
         hstack(
-               textView,
-               sendButton.withSize(.init(width: 60, height: 60)),
-               alignment: .center)
-            .withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
+            textView,
+            sendButton.withSize(.init(width: 60, height: 60)),
+            alignment: .center
+        ).withMargins(.init(top: 0, left: 16, bottom: 0, right: 16))
         
         addSubview(placeHolderLabel)
         
-        placeHolderLabel.anchor(top: nil, leading: leadingAnchor, bottom: nil, trailing: sendButton.leadingAnchor, padding: .init(top: 0, left: 20, bottom: 0, right: 0))
+        placeHolderLabel.anchor(
+            top: nil,
+            leading: leadingAnchor,
+            bottom: nil,
+            trailing: sendButton.leadingAnchor,
+            padding: .init(top: 0, left: 20, bottom: 0, right: 0)
+        )
         placeHolderLabel.centerYAnchor.constraint(equalTo: sendButton.centerYAnchor).isActive = true
     }
     

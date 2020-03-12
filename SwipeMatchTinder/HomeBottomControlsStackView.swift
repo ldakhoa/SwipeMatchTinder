@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeBottomControlsStackView: UIStackView {
+final class HomeBottomControlsStackView: UIStackView {
 
     static func createButton(image: UIImage) -> UIButton {
         let button = UIButton(type: .system)

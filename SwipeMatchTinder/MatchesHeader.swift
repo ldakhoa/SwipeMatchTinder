@@ -8,7 +8,7 @@
 
 import LBTATools
 
-class MatchesHeader: UICollectionReusableView {
+final class MatchesHeader: UICollectionReusableView {
     
     let newMatchesLabel = UILabel(text: "New Matches", font: .boldSystemFont(ofSize: 16), textColor: #colorLiteral(red: 0.9995308518, green: 0.4215543866, blue: 0.4476390481, alpha: 1))
     

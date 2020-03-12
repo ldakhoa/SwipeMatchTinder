@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class MatchView: UIView {
+final class MatchView: UIView {
     
     var currentUser: User!
 
@@ -108,12 +108,15 @@ class MatchView: UIView {
         addSubview(visualEffectView)
         visualEffectView.fillSuperview()
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut,
+            animations: {
             self.visualEffectView.alpha = 1
-            
-        }) { (_) in
-            
-        }
+        })
     }
 
     @objc fileprivate func handleKeepSwiping() {
@@ -143,14 +146,43 @@ class MatchView: UIView {
         
         let imageSize: CGFloat = 140
 
-        itsAMatchImageView.anchor(top: nil, leading: nil, bottom: descriptionLabel.topAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 16, right: 0), size: .init(width: 300, height: 80))
+        itsAMatchImageView.anchor(
+            top: nil,
+            leading: nil,
+            bottom: descriptionLabel.topAnchor,
+            trailing: nil,
+            padding: .init(top: 0, left: 0, bottom: 16, right: 0),
+            size: .init(width: 300, height: 80)
+        )
         itsAMatchImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        descriptionLabel.anchor(top: nil, leading: leadingAnchor, bottom: currentUserImageView.topAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 32, right: 0), size: .init(width: 0, height: 50))
         
-        currentUserImageView.anchor(top: nil, leading: nil, bottom: nil, trailing: centerXAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 16), size: .init(width: imageSize, height: imageSize))
+        descriptionLabel.anchor(
+            top: nil,
+            leading: leadingAnchor,
+            bottom: currentUserImageView.topAnchor,
+            trailing: trailingAnchor,
+            padding: .init(top: 0, left: 0, bottom: 32, right: 0),
+            size: .init(width: 0, height: 50)
+        )
+        
+        currentUserImageView.anchor(
+            top: nil,
+            leading: nil,
+            bottom: nil,
+            trailing: centerXAnchor,
+            padding: .init(top: 0, left: 0, bottom: 0, right: 16),
+            size: .init(width: imageSize, height: imageSize)
+        )
         currentUserImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 
-        cardUserImageView.anchor(top: nil, leading: centerXAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 16, bottom: 0, right: 0), size: .init(width: imageSize, height: imageSize))
+        cardUserImageView.anchor(
+            top: nil,
+            leading: centerXAnchor,
+            bottom: nil,
+            trailing: nil,
+            padding: .init(top: 0, left: 16, bottom: 0, right: 0),
+            size: .init(width: imageSize, height: imageSize)
+        )
         cardUserImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         sendMessageButton.anchor(top: currentUserImageView.bottomAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 32, left: 48, bottom: 0, right: 48), size: .init(width: 0, height: 60))
@@ -163,8 +195,10 @@ class MatchView: UIView {
         views.forEach({$0.alpha = 1})
         // starting positions
         let angle = 30 * CGFloat.pi / 180
-        currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
-        cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                                        .concatenating(CGAffineTransform(translationX: 200, y: 0))
+        cardUserImageView.transform = CGAffineTransform(rotationAngle: angle)
+                                        .concatenating(CGAffineTransform(translationX: -200, y: 0))
 
         sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
         keepSwipingButton.transform = CGAffineTransform(translationX: 500, y: 0)
@@ -186,10 +220,17 @@ class MatchView: UIView {
             
         })
         
-        UIView.animate(withDuration: 0.75, delay: 0.6 * 1.3, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1, options: .curveEaseOut, animations: {
-            self.sendMessageButton.transform = .identity
-            self.keepSwipingButton.transform = .identity
-        })
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.6 * 1.3,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 0.1,
+            options: .curveEaseOut,
+            animations: {
+                self.sendMessageButton.transform = .identity
+                self.keepSwipingButton.transform = .identity
+            }
+        )
         
     }
     

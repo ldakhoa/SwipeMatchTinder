@@ -9,7 +9,7 @@
 import LBTATools
 import Firebase
 
-class RecentMessageCell: LBTAListCell<RecentMessage> {
+final class RecentMessageCell: LBTAListCell<RecentMessage> {
     
     let userProfileImageView = UIImageView(image: nil, contentMode: .scaleAspectFill)
     let usernameLabel = UILabel(text: "USERNAME HERE", font: .boldSystemFont(ofSize: 18))
@@ -31,11 +31,12 @@ class RecentMessageCell: LBTAListCell<RecentMessage> {
         let size: CGFloat = 94
         userProfileImageView.layer.cornerRadius = size / 2
         
-        hstack(userProfileImageView.withWidth(size).withHeight(size),
-               stack(usernameLabel, messageTextLabel, spacing: 2),
-               spacing: 20,
-               alignment: .center
-            ).padLeft(20).padRight(20)
+        hstack(
+            userProfileImageView.withWidth(size).withHeight(size),
+            stack(usernameLabel, messageTextLabel, spacing: 2),
+            spacing: 20,
+            alignment: .center
+        ).padLeft(20).padRight(20)
         
         addSeparatorView(leadingAnchor: usernameLabel.leadingAnchor)
         

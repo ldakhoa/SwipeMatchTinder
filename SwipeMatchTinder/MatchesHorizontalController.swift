@@ -9,7 +9,7 @@
 import Firebase
 import LBTATools
 
-class MatchesHorizontalController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
+final class MatchesHorizontalController: LBTAListController<MatchCell, Match>, UICollectionViewDelegateFlowLayout {
     
     weak var rootMatchesController: MatchesMassagesController?
     

@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-class LoginViewModel {
+final class LoginViewModel {
     
     var isLoggingIn = Bindable<Bool>()
     var isFormValid = Bindable<Bool>()

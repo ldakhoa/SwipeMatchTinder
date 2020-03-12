@@ -9,7 +9,7 @@
 import LBTATools
 import Firebase
 
-class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, RecentMessage, MatchesHeader>, UICollectionViewDelegateFlowLayout {
+final class MatchesMassagesController: LBTAListHeaderController<RecentMessageCell, RecentMessage, MatchesHeader>, UICollectionViewDelegateFlowLayout {
 
     let customNavBar = MatchesNavBar()
     

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
 
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()

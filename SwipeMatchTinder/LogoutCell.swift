@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogoutCell: UITableViewCell {
+final class LogoutCell: UITableViewCell {
 
     let logoutButton: UIButton = {
         let button = UIButton()
@@ -29,7 +29,15 @@ class LogoutCell: UITableViewCell {
         
 
         addSubview(view)
-        view.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 44))
+        view.anchor(
+            top: topAnchor,
+            leading: leadingAnchor,
+            bottom: bottomAnchor,
+            trailing: trailingAnchor,
+            padding: .init(top: 0, left: 0, bottom: 0, right: 0),
+            size: .init(width: 0, height: 44)
+        )
+        
         view.addSubview(logoutButton)
         logoutButton.fillSuperview()
     }

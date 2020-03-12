@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+final class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var controllers = [UIViewController]()
     
@@ -20,7 +20,12 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
                 return photoController
                 
             })
-            setViewControllers([controllers.first!], direction: .forward, animated: false, completion: nil)
+            setViewControllers(
+                [controllers.first!],
+                direction: .forward,
+                animated: false,
+                completion: nil
+            )
             
             setupBarStackViews()
         }
@@ -47,14 +52,26 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
             paddingTop += UIApplication.shared.statusBarFrame.height
         }
 
-        barsStackView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: paddingTop, left: 8, bottom: 0, right: 8), size: .init(width: 0, height: 4))
+        barsStackView.anchor(
+            top: view.topAnchor,
+            leading: view.leadingAnchor,
+            bottom: nil,
+            trailing: view.trailingAnchor,
+            padding: .init(top: paddingTop, left: 8, bottom: 0, right: 8),
+            size: .init(width: 0, height: 4)
+        )
         
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
         let currentPhotoController = viewControllers?.first
         if let index = controllers.firstIndex(where: {$0 == currentPhotoController}) {
-            barsStackView.arrangedSubviews.forEach({$0.backgroundColor = barDeselectedColor})
+            barsStackView.arrangedSubviews.forEach( {$0.backgroundColor = barDeselectedColor} )
             barsStackView.arrangedSubviews[index].backgroundColor = .white
         }
     }
@@ -94,32 +111,48 @@ class SwipingPhotosController: UIPageViewController, UIPageViewControllerDataSou
         let currentController = viewControllers!.first!
         
         if let index = controllers.firstIndex(of: currentController) {
-            barsStackView.arrangedSubviews.forEach({$0.backgroundColor = barDeselectedColor})
+            barsStackView.arrangedSubviews.forEach( {$0.backgroundColor = barDeselectedColor} )
             let tapLocation = gesture.location(in: self.view)
             let shouldAdvancePhoto = tapLocation.x > view.frame.width / 2 ? true : false
             if shouldAdvancePhoto {
                 let nextIndex = min(index + 1, controllers.count - 1)
                 let nextController = controllers[nextIndex]
-                setViewControllers([nextController], direction: .forward, animated: false, completion: nil)
+                setViewControllers(
+                    [nextController],
+                    direction: .forward,
+                    animated: false,
+                    completion: nil
+                )
 
                 barsStackView.arrangedSubviews[nextIndex].backgroundColor = .white
             } else {
                 let previousIndex = max(0, index - 1)
                 let previousController = controllers[previousIndex]
-                setViewControllers([previousController], direction: .forward, animated: false, completion: nil)
+                setViewControllers(
+                    [previousController],
+                    direction: .forward,
+                    animated: false,
+                    completion: nil
+                )
                 barsStackView.arrangedSubviews[previousIndex].backgroundColor = .white
             }
         }
     }
 
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? -1
         if index == controllers.count - 1 { return nil }
         return controllers[index + 1]
         
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
         let index = self.controllers.firstIndex(where: {$0 == viewController}) ?? -1
         if index == 0 { return nil }
         return controllers[index - 1]

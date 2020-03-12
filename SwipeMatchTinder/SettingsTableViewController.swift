@@ -11,11 +11,11 @@ import Firebase
 import JGProgressHUD
 import SDWebImage
 
-protocol SettingsControllerDelegate {
+protocol SettingsControllerDelegate: class {
     func didSaveSettings()
 }
 
-class SettingsTableViewController: UITableViewController {
+final class SettingsTableViewController: UITableViewController {
     
     deinit {
         print("Object is destroing itself properly, no retain cycles of any other memory related issue. Memory being reclaimed properly")
@@ -65,9 +65,19 @@ class SettingsTableViewController: UITableViewController {
         navigationItem.title = "Settings"
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.9652562737, green: 0.3096027374, blue: 0.6150571108, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: #selector(handleCancel)
+        )
         navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave)),
+            UIBarButtonItem(
+                title: "Save",
+                style: .plain,
+                target: self,
+                action: #selector(handleSave)
+            ),
         ]
     }
     
@@ -148,11 +158,24 @@ class SettingsTableViewController: UITableViewController {
         stackView.spacing = padding
         
         header.addSubview(image1Button)
-        image1Button.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: padding, right: 0))
+        image1Button.anchor(
+            top: header.topAnchor,
+            leading: header.leadingAnchor,
+            bottom: header.bottomAnchor,
+            trailing: nil,
+            padding: .init(top: padding, left: padding, bottom: padding, right: 0)
+        )
+        
         image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
         
         header.addSubview(stackView)
-        stackView.anchor(top: header.topAnchor, leading: image1Button.trailingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
+        stackView.anchor(
+            top: header.topAnchor,
+            leading: image1Button.trailingAnchor,
+            bottom: header.bottomAnchor,
+            trailing: header.trailingAnchor,
+            padding: .init(top: padding, left: padding, bottom: padding, right: padding)
+        )
         return header
     }()
     
@@ -277,7 +300,7 @@ extension SettingsTableViewController {
     
 }
 
-// MARK: - UITableViewController Delegate
+// MARK: - UITableViewControllerDelegate
 
 extension SettingsTableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

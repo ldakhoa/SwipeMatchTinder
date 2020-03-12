@@ -9,11 +9,11 @@
 import UIKit
 import JGProgressHUD
 
-protocol LoginControllerDelegate {
+protocol LoginControllerDelegate: class {
     func didFinishLoggingIn()
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     fileprivate let loginViewModel = LoginViewModel()
     fileprivate let loginHUD = JGProgressHUD(style: .dark)
@@ -137,7 +137,13 @@ class LoginViewController: UIViewController {
     fileprivate func setupLayout() {
         navigationController?.isNavigationBarHidden = true
         view.addSubview(verticalStackView)
-        verticalStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 40, bottom: 0, right: 40))
+        verticalStackView.anchor(
+            top: nil,
+            leading: view.leadingAnchor,
+            bottom: nil,
+            trailing: view.trailingAnchor,
+            padding: .init(top: 0, left: 40, bottom: 0, right: 40)
+        )
         verticalStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         view.addSubview(backToRegisterButton)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BioCell: UITableViewCell {
+final class BioCell: UITableViewCell {
     
     let textView: UITextView = {
         let tv = BioSettingsTextView()

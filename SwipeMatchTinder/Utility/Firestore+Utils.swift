@@ -23,9 +23,6 @@ extension Firestore {
             completion(user, nil)
             
         }
-    }
-    
-    
-    
+    }    
 }
 

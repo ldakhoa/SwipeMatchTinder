@@ -8,7 +8,7 @@
 
 import LBTATools
 
-class MessageCell: LBTAListCell<Message> {
+final class MessageCell: LBTAListCell<Message> {
     
     let textView: UITextView = {
         let tv = UITextView()
@@ -52,7 +52,12 @@ class MessageCell: LBTAListCell<Message> {
     fileprivate func setupLayout() {
         addSubview(bubbleContainer)
         
-        anchoredConstraints = bubbleContainer.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        anchoredConstraints = bubbleContainer.anchor(
+            top: topAnchor,
+            leading: leadingAnchor,
+            bottom: bottomAnchor,
+            trailing: trailingAnchor
+        )
         
         anchoredConstraints.leading?.constant = 20
         anchoredConstraints.trailing?.isActive = false

@@ -36,8 +36,4 @@ class BioSettingsTextView: UITextView {
         fatalError("init(coder:) has not been implemented")
     }
     
-
-    
-    
-    
 }

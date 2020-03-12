@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
+final class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
 
     let swipingPhotosController = SwipingPhotosController()
     
@@ -72,10 +72,23 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(swipingView)
         
         scrollView.addSubview(infoLabel)
-        infoLabel.anchor(top: swipingView.bottomAnchor, leading: scrollView.leadingAnchor, bottom: nil, trailing: scrollView.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+        infoLabel.anchor(
+            top: swipingView.bottomAnchor,
+            leading: scrollView.leadingAnchor,
+            bottom: nil,
+            trailing: scrollView.trailingAnchor,
+            padding: .init(top: 16, left: 16, bottom: 0, right: 16)
+        )
         
         scrollView.addSubview(dismissButton)
-        dismissButton.anchor(top: swipingView.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: -25, left: 0, bottom: 0, right: 24), size: .init(width: 50, height: 50))
+        dismissButton.anchor(
+            top: swipingView.bottomAnchor,
+            leading: nil,
+            bottom: nil,
+            trailing: view.trailingAnchor,
+            padding: .init(top: -25, left: 0, bottom: 0, right: 24),
+            size: .init(width: 50, height: 50)
+        )
     }
     
     fileprivate let extraSwipingHeight: CGFloat = 80
@@ -83,7 +96,12 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         // Auto layout in ScrollView is not same behavior like Normal UIView, so use frame instead of auto layout
-        swipingView.frame = .init(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraSwipingHeight)
+        swipingView.frame = .init(
+            x: 0,
+            y: 0,
+            width: view.frame.width,
+            height: view.frame.width + extraSwipingHeight
+        )
     }
     
     fileprivate func setupVisualBlurEffectView() {
@@ -91,7 +109,12 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
         
         view.addSubview(visualEffectView)
-        visualEffectView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: view.safeAreaLayoutGuide.topAnchor, trailing: view.trailingAnchor)
+        visualEffectView.anchor(
+            top: view.topAnchor,
+            leading: view.leadingAnchor,
+            bottom: view.safeAreaLayoutGuide.topAnchor,
+            trailing: view.trailingAnchor
+        )
     }
     
     fileprivate func setupBottomControls() {
@@ -100,7 +123,14 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         stackView.spacing = -32
         
         view.addSubview(stackView)
-        stackView.anchor(top: nil, leading: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 300, height: 80))
+        stackView.anchor(
+            top: nil,
+            leading: nil,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            trailing: nil,
+            padding: .init(top: 0, left: 0, bottom: 0, right: 0),
+            size: .init(width: 300, height: 80)
+        )
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -110,9 +140,12 @@ class UserDetailsViewController: UIViewController, UIScrollViewDelegate {
         width = max(view.frame.width, width)
         let x = min(0, changeY)
         
-        swipingView.frame = .init(x: x, y: x, width: width, height: width + extraSwipingHeight)
+        swipingView.frame = .init(
+            x: x,
+            y: x,
+            width: width,
+            height: width + extraSwipingHeight
+        )
     }
-
-
 
 }

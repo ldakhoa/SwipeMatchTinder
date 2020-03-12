@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class RegistrationViewModel {
+final class RegistrationViewModel {
 
     var bindableIsRegistering = Bindable<Bool>()
     var bindableIsFormValid = Bindable<Bool>()
@@ -20,7 +20,10 @@ class RegistrationViewModel {
     var password: String? { didSet { checkFormValidity() } }
 
     func checkFormValidity() {
-        let isFormValid = fullname?.isEmpty == false && email?.isEmpty == false && password?.isEmpty == false && bindableImage.value != nil
+        let isFormValid = fullname?.isEmpty == false
+            && email?.isEmpty == false
+            && password?.isEmpty == false
+            && bindableImage.value != nil
         bindableIsFormValid.value = isFormValid
     }
 
@@ -30,7 +33,7 @@ class RegistrationViewModel {
         guard let email = email, let password = password else { return }
         bindableIsRegistering.value = true
         
-        Auth.auth().createUser(withEmail: email, password: password) { (res, err) in
+        Auth.auth().createUser(withEmail: email, password: password) { (_, err) in
             if let err = err {
                 completion(err)
                 return
@@ -43,7 +46,7 @@ class RegistrationViewModel {
         let filename = UUID().uuidString
         let ref = Storage.storage().reference(withPath: "/images/\(filename)")
         let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-        
+
         ref.putData(imageData, metadata: nil, completion: { (_, err) in
             if let err = err {
                 completion(err)

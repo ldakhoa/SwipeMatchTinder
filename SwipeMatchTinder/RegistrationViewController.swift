@@ -9,7 +9,7 @@
 import UIKit
 import JGProgressHUD
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     
     var delegate: LoginControllerDelegate?
     
@@ -166,7 +166,12 @@ class RegistrationViewController: UIViewController {
     lazy var selectPhotoButtonHeightAnchor = selectPhotoButton.heightAnchor.constraint(equalToConstant: 275)
     
     lazy var verticalStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
+        let sv = UIStackView(arrangedSubviews: [
+            fullNameTextField,
+            emailTextField,
+            passwordTextField,
+            registerButton
+        ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
         sv.spacing = 8
@@ -229,8 +234,19 @@ class RegistrationViewController: UIViewController {
     // MARK: - Handle Keyboard show / hide
     
     fileprivate func setupNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
 
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
@@ -244,9 +260,16 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc fileprivate func handleKeyboardHide() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.view.transform = .identity
-        })
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut,
+            animations: {
+                self.view.transform = .identity
+            }
+        )
     }
     
     fileprivate func setupTapGesture() {

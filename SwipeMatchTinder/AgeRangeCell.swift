@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AgeRangeCell: UITableViewCell {
+final class AgeRangeCell: UITableViewCell {
 
     let minSlider: UISlider = {
         let slider = UISlider()
@@ -49,7 +49,13 @@ class AgeRangeCell: UITableViewCell {
         
         addSubview(overallStackView)
         let padding: CGFloat = 16
-        overallStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
+        overallStackView.anchor(
+            top: topAnchor,
+            leading: leadingAnchor,
+            bottom: bottomAnchor,
+            trailing: trailingAnchor,
+            padding: .init(top: padding, left: padding, bottom: padding, right: padding)
+        )
         
     }
     

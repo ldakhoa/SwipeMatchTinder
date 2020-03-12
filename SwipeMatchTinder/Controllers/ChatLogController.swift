@@ -9,7 +9,7 @@
 import LBTATools
 import Firebase
 
-class ChatLogController: LBTAListController<MessageCell, Message> {
+final class ChatLogController: LBTAListController<MessageCell, Message> {
     
     deinit {
         print("Chatlog Object is destroing itself properly, no retain cycles of any other memory related issue. Memory being reclaimed properly")
@@ -181,7 +181,6 @@ class ChatLogController: LBTAListController<MessageCell, Message> {
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
         }
-        
         
     }
     

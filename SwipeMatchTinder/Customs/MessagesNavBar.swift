@@ -8,7 +8,7 @@
 
 import LBTATools
 
-class MessagesNavBar: UIView {
+final class MessagesNavBar: UIView {
     
     let userProfileImageView = CircularImageView(width: 44, image: nil)
     let nameLabel = UILabel(text: "USERNAME", font: .systemFont(ofSize: 16))
@@ -41,10 +41,23 @@ class MessagesNavBar: UIView {
             alignment: .center
         )
         
-        hstack(backButton.withWidth(50),
-               middleStack,
-               flagButton).withMargins(.init(top: 0, left: 4, bottom: 0, right: 16))
-        setupShadow(opacity: 0.2, radius: 8, offset: .init(width: 0, height: 10), color: .init(white: 0, alpha: 0.3))
+        hstack(
+            backButton.withWidth(50),
+            middleStack,
+            flagButton
+        ).withMargins(.init(
+            top: 0,
+            left: 4,
+            bottom: 0,
+            right: 16)
+        )
+        
+        setupShadow(
+            opacity: 0.2,
+            radius: 8,
+            offset: .init(width: 0, height: 10),
+            color: .init(white: 0, alpha: 0.3)
+        )
         
     }
     
